@@ -1,0 +1,37 @@
+<mat-card class="card">
+  <mat-card-header>
+    <h1>Gestionar Usuarios</h1>
+  </mat-card-header>
+
+  <mat-card-content class="card_content">
+    <form
+      class="example-form"
+      [formGroup]="registerform"
+      (ngSubmit)="updateuser()"
+    >
+
+  <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+
+    <mat-option  value="">Select Role</mat-option>
+    <mat-option *ngFor="let item of rolelist" [value]="item.code">
+      {{item.name}}
+    </mat-option>
+
+  </mat-select>
+        <mat-icon  style="color:blueviolet" matSuffix>account_circle</mat-icon>
+  </mat-form-field>
+
+      <div>
+
+           <mat-checkbox  formControlName="isactive" class="example-margin">Es Activo</mat-checkbox>
+      </div>
+
+      <div class="botones">
+        <button  type="submit" onclick="updateuser()" mat-raised-button color="primary">Actualizar</button>
+        <a class="botones" mat-raised-button  mat-dialog-close color="accent">Cerrar</a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

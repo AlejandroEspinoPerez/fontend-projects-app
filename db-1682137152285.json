@@ -1,0 +1,313 @@
+{
+  "userList": [
+    {
+      "id": "admin",
+      "name": "admin user",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "male",
+      "role": "admin",
+      "isactive": true
+    },
+    {
+      "id": "hyugygu",
+      "name": "dwde",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "usuario",
+      "isactive": false
+    },
+    {
+      "id": "alejan",
+      "name": "a",
+      "password": "12345",
+      "email": "a@uci.cu",
+      "gender": "hombre",
+      "role": "trabajador",
+      "isactive": true
+    },
+    {
+      "id": "lianet",
+      "name": "Lianet",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "male",
+      "role": " trabajador",
+      "isactive": false
+    },
+    {
+      "id": "aileni",
+      "name": "Aileni",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "usuario",
+      "isactive": true
+    },
+    {
+      "id": "magda",
+      "name": "Magda",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "female",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "pepe",
+      "name": "Pepe",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "jose",
+      "name": "Jose",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "asd",
+      "name": "sada",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "ee",
+      "name": "we",
+      "password": "12345",
+      "email": "admin@dwed",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "eeeeeeeeee",
+      "name": "ee",
+      "password": "12345",
+      "email": "admin@wwee",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "asasaa",
+      "name": "sas",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "ffff",
+      "name": "ffff",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "hombre",
+      "role": "",
+      "isactive": false
+    },
+    {
+      "id": "yovito",
+      "name": "Yovito",
+      "password": "12345",
+      "email": "admin@uci.cu",
+      "gender": "male",
+      "role": "usuario",
+      "isactive": true
+    }
+  ],
+  "role": [
+    {
+      "code": "usuario",
+      "name": "Usuario"
+    },
+    {
+      "code": "trabajador",
+      "name": "Trabajador"
+    }
+  ],
+  "menu": [
+    {
+      "code": "apartamento",
+      "name": "Apartamento"
+    },
+    {
+      "code": "residencia",
+      "name": "Residencia"
+    }
+  ],
+  "roleacces": [
+    {
+      "role": "admin",
+      "menu": "residencia",
+      "haveedit": true,
+      "haveadd": true,
+      "havedelete": true
+    },
+    {
+      "role": "admin",
+      "menu": "apartamento",
+      "haveedit": true,
+      "haveadd": true,
+      "havedelete": true
+    },
+    {
+      "role": "usuario",
+      "menu": "residencia",
+      "haveedit": false,
+      "haveadd": false,
+      "havedelete": false
+    },
+    {
+      "role": "usuario",
+      "menu": "apartamento",
+      "haveedit": false,
+      "haveadd": false,
+      "havedelete": false
+    },
+    {
+      "role": "trabajador",
+      "menu": "residencia",
+      "haveedit": false,
+      "haveadd": true,
+      "havedelete": false
+    },
+    {
+      "role": "trabajador",
+      "menu": "apartamento",
+      "haveedit": false,
+      "haveadd": true,
+      "havedelete": false
+    }
+  ],
+  "becadoList": [
+    {
+      "nombre": "Pepe",
+      "ci": "0003243243",
+      "ano": "4",
+      "apartamentoId": 1
+    },
+    {
+      "nombre": "Pepe",
+      "ci": "0003243243",
+      "ano": "4",
+      "apartamentoId": 1
+    },
+    {
+      "nombre": "Jose",
+      "ci": "0003243243",
+      "ano": "4",
+      "apartamentoId": 2
+    },
+    {
+      "nombre": "Jorge",
+      "ci": "0003243243",
+      "ano": "5",
+      "apartamentoId": 3
+    }
+  ],
+  "apartamentoList": [
+    {
+      "numeroApartamento": "101",
+      "cantBecados": 6,
+      "nombreJefe": "hhhh",
+      "capacidadApto": -5,
+      "id": 5
+    }
+  ],
+  "residenciaList": [
+    {
+      "numeroFacultad": "3",
+      "cantApto": 33,
+      "nombreJefe": "dddeeeeeeeeeeeeeeee",
+      "id": 17
+    },
+    {
+      "numeroFacultad": "3",
+      "cantApto": 33,
+      "nombreJefe": "ddd",
+      "id": 17
+    },
+    {
+      "numeroFacultad": "3",
+      "cantApto": 33,
+      "nombreJefe": "ddd",
+      "id": 17
+    },
+    {
+      "numeroFacultad": "3",
+      "cantApto": 33,
+      "nombreJefe": "ddd",
+      "id": 17
+    },
+    {
+      "numeroFacultad": "3",
+      "cantApto": 33,
+      "nombreJefe": "ddd",
+      "id": 17
+    },
+    {
+      "numeroFacultad": "1",
+      "cantApto": 3,
+      "nombreJefe": "ww",
+      "id": 18
+    },
+    {
+      "numeroFacultad": "3",
+      "cantApto": 37,
+      "nombreJefe": "uiii",
+      "id": 19
+    },
+    {
+      "numeroFacultad": "2",
+      "cantApto": 34,
+      "nombreJefe": "eee",
+      "id": 20
+    },
+    {
+      "numeroFacultad": "2",
+      "cantApto": 23,
+      "nombreJefe": "uuuu",
+      "id": 21
+    }
+  ],
+  "cantidades": [
+    {
+      "id": "1",
+      "cantR": "5"
+    },
+    {
+      "id": "2",
+      "cantA": "5"
+    },
+    {
+      "id": "3",
+      "cantB": "5"
+    },
+    {
+      "id": "4",
+      "cantU": "5"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -1,0 +1,143 @@
+.title-table
+{
+  font-weight: 900;
+}
+
+
+.contenedorGrande{
+    height: 100%;
+    padding: 0px;
+}
+example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.toolbar{
+  min-width: 100%;
+}
+.mat-mdc-table .mdc-data-table__header-row  {
+  height: 30px;
+  background: #7c4dff;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+
+.container
+{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.colum
+{
+  align-items: center;
+}
+
+.filter{
+  position: absolute;
+  display: flex;
+
+}
+
+.container-table{
+margin-top: 10px;
+
+}
+
+
+
+
+@media (max-width: 800px){
+  example-icon {
+    padding: 0 14px;
+  }
+
+    .body{
+      padding: 2px;
+    }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .toolbar{
+    min-width: 100%;
+  }
+
+  table {
+    width: 90%;
+    padding: 5px;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 4px;
+    width: 100%;
+  }
+
+
+
+  .container
+  { width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    padding: 2px;
+
+  }
+
+
+  .filter{
+    position: absolute;
+    display: flex;
+
+  }
+
+  .title-table{
+    font-weight: 500;
+    max-width: 10px;
+    height: 50px;
+  }
+  th{
+    background: #7c4dff;
+    max-width: 30px;
+  }
+
+
+  .mar-column-nombre{
+    flex: 1 1 1%;
+
+  }
+
+.colum{
+  padding: 4px;
+  margin: 4px;
+  max-width: 15%;
+}
+.title-accion{
+max-width: 5px;
+}
+.container-table{
+  margin-top: 10px;
+
+  }
+
+
+}
+
+
+
+
+
+
+
+
+

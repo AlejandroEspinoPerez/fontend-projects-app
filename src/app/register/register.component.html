@@ -1,0 +1,65 @@
+
+
+<mat-card class="card">
+  <mat-card-header>
+    <h1>Registro de Usuario</h1>
+  </mat-card-header>
+
+  <mat-card-content class="card_content">
+    <form
+      class="example-form"
+      [formGroup]="registerform"
+      (ngSubmit)="prosederRegister()"
+    >
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nombre de Usario</mat-label>
+        <input matInput formControlName="id" />
+        <mat-icon matSuffix>account_circle</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name"  />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+        
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+
+        />
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+
+      <div>
+        <mat-radio-group formControlName="gender" aria-label="Genero">
+          <mat-radio-button value="male">Hombre</mat-radio-button>
+          <mat-radio-button value="female">Mujer</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="botones">
+        <button mat-raised-button color="primary">Submit</button>
+        <a class="botones" routerLink="/login" mat-raised-button color="accent">Regresar al login</a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
+
+

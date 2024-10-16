@@ -1,0 +1,70 @@
+<div class="sidenav" style="color:{{color}}" [ngClass]="collapsed ?'sidenav-collapsed':'' ">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">C</button>
+    <div class="logo-text" @fadeInOut *ngIf="collapsed">Cátedra del Adulto Mayor</div>
+    <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fal fa-times close-icon" @rotate></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+
+    <!--Icono del dashboard -->
+    <li class="sidenav-nav-item" >
+      <a class="sidenav-nav-link" routerLink="dashboard" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon icon-sidenav fal fa-home" ></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Dashboard</span>
+      </a>
+    </li>
+
+    <!--Icono del Anciano -->
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" routerLink="anciano" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon icon-sidenav fa fa-user-circle"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Anciano</span>
+      </a>
+    </li>
+
+      <!--Icono del Contacto -->
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" routerLink="contactos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon icon-sidenav fal fa-address-card"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Contactos</span>
+        </a>
+      </li>
+
+      <!--Icono del Contacto -->
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" routerLink="enfermedades" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon icon-sidenav fal fa fa-bed"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Enfermedad</span>
+        </a>
+      </li>
+
+    <li class="sidenav-nav-item" *ngIf="isAdmin" >
+      <a class="sidenav-nav-link" routerLink="userlisting" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon icon-sidenav fal fa-cog" ></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Usuarios y permisos</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item" >
+      <a class="sidenav-nav-link" routerLink="login" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon icon-sidenav fal fa-sign-out" ></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Salir</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item switch">
+      <mat-slide-toggle  thumbIcon (ngModelChange)="onChange($event)" ngModel="isdarkThemeActive"></mat-slide-toggle>
+
+      <span class="sidenav-link-text" style="color:#fff" @fadeInOut *ngIf="collapsed">Tema {{name}}</span>
+
+    </li>
+  </ul>
+
+
+</div>

@@ -1,0 +1,91 @@
+<div class="contenedorGrande">
+  <div class="container">
+    <h1 class="h1centrado">Dashboard</h1>
+    <div *ngIf="logueado" class="card">
+      <div class="card-head" style="color: black;">Autenticación Necesaria</div>
+      <div class="card-body">
+        <p style="color: black;">AUTENTÍQUESE EN EL SISTEMA PARA MÁS INFORMACIÓN Y GESTIÓN</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!logueado" class="col-md-12 container contenedorCard">
+    <div class="row">
+      <!-- Card for Ancianos -->
+      <div class="col-xl-3 col-lg-6">
+        <div routerLink="/anciano" class="card l-bg-cherry">
+          <div class="card-statistic-3 p-4">
+            <div class="card-icon card-icon-large"><i class="fas fa-user"></i></div>
+            <div class="mb-4">
+              <h5 class="card-title mb-0">Ancianos</h5>
+            </div>
+            <div class="row align-items-center mb-2 d-flex">
+              <div class="col-8">
+                <h2 class="d-flex align-items-center mb-0">{{ cantAncianos }}</h2>
+              </div>
+              <div class="col-4 text-right">
+                <span>{{ porCientoAncianos }}% <i class="fa fa-arrow-up"></i></span>
+              </div>
+            </div>
+            <div class="progress mt-1" style="height: 8px;">
+              <div class="progress-bar" style="width: {{ porCientoAncianos }}%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card for Contactos -->
+      <div class="col-xl-3 col-lg-6">
+        <div routerLink="/contactos" class="card l-bg-blue-dark">
+          <div class="card-statistic-3 p-4">
+            <div class="card-icon card-icon-large"><i class="fas fa-phone"></i></div>
+            <div class="mb-4">
+              <h5 class="card-title mb-0">Contactos</h5>
+            </div>
+            <div class="row align-items-center mb-2 d-flex">
+              <div class="col-8">
+                <h2 class="d-flex align-items-center mb-0">{{ cantContactos }}</h2>
+              </div>
+              <div class="col-4 text-right">
+                <span>{{ porCientoContactos }}% <i class="fa fa-arrow-up"></i></span>
+              </div>
+            </div>
+            <div class="progress mt-1" style="height: 8px;">
+              <div class="progress-bar" style="width: {{ porCientoContactos }}%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card for Enfermedades -->
+      <div class="col-xl-3 col-lg-6">
+        <div routerLink="/enfermedades" class="card l-bg-green-dark">
+          <div class="card-statistic-3 p-4">
+            <div class="card-icon card-icon-large"><i class="fas fa-heartbeat"></i></div>
+            <div class="mb-4">
+              <h5 class="card-title mb-0">Enfermedades</h5>
+            </div>
+            <div class="row align-items-center mb-2 d-flex">
+              <div class="col-8">
+                <h2 class="d-flex align-items-center mb-0">{{ cantEnfermedades }}</h2>
+              </div>
+              <div class="col-4 text-right">
+                <span>{{ porCientoEnfermedades }}% <i class="fa fa-arrow-up"></i></span>
+              </div>
+            </div>
+            <div class="progress mt-1" style="height: 8px;">
+              <div class="progress-bar" style="width: {{ porCientoEnfermedades }}%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie chart section -->
+    <div class="row">
+      <div class="col-lg-6">
+        <canvas id="piechart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

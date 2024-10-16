@@ -1,0 +1,16 @@
+@media (max-width: 600px){
+  .container1{
+    display: grid;
+    grid-template:
+    "sidenav" 50px
+    "body "    auto /
+    auto;
+  }
+}
+
+.sidenav{
+  grid-area: sidenav ;
+}
+.body{
+  grid-area: body;
+}
