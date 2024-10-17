@@ -57,9 +57,10 @@ export class DialogActivitiesComponent implements OnInit {
         fechaInicio: new Date(this.actividadForm.value.fechaInicio).toISOString().split('T')[0],
         fechaFin: new Date(this.actividadForm.value.fechaFin).toISOString().split('T')[0],
         responsable: this.actividadForm.value.responsable,
-        proyecto: this.editData.projectId // Utiliza el ID del proyecto que pasaste al abrir el diálogo
+        proyecto: this.editData.projectId // Se asegura de utilizar el ID del proyecto
       };
 
+      // Verificar si se trata de edición o creación
       if (this.editData && this.editData.id) {
         this.updateActividad(this.editData.id, actividadData); // Llamar a la función de actualización
       } else {
