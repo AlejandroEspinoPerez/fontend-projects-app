@@ -1,0 +1,132 @@
+<div class="contenedorGrande">
+
+  <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar-row>
+      <mat-icon class="example-icon">verified_user</mat-icon>
+      <span>Proyectos</span>
+      <span class="example-spacer"></span>
+      <button *ngIf="showAddButton" mat-raised-button color="warn" (click)="openDialogProject()">Agregar
+        Proyecto</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="container" style="margin-top: 10px;">
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+      <mat-icon matSuffix>filter_alt</mat-icon>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8 container-table">
+      <table mat-table class="mat-table-sm" [dataSource]="dataSource" matSort>
+
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+        </ng-container>
+
+        <!-- Descripcion Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+          <td mat-cell *matCellDef="let row">{{ row.descripcion }}</td>
+        </ng-container>
+
+        <!-- Tipo Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+          <td mat-cell *matCellDef="let row">{{ row.tipo }}</td>
+        </ng-container>
+
+        <!-- Localidad Column -->
+        <ng-container matColumnDef="localidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Localidad</th>
+          <td mat-cell *matCellDef="let row">{{ row.localidad }}</td>
+        </ng-container>
+
+        <!-- Objetivos Column -->
+        <ng-container matColumnDef="objetivos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Objetivos</th>
+          <td mat-cell *matCellDef="let row">{{ row.objetivos }}</td>
+        </ng-container>
+
+        <!-- Presupuesto Column -->
+        <ng-container matColumnDef="presupuesto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Presupuesto</th>
+          <td mat-cell *matCellDef="let row">{{ row.presupuesto | currency }}</td>
+        </ng-container>
+
+        <!-- Fecha Inicio Column -->
+        <ng-container matColumnDef="fechaInicio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Inicio</th>
+          <td mat-cell *matCellDef="let row">{{ row.fechaInicio | date:'shortDate' }}</td>
+        </ng-container>
+
+        <!-- Fecha Fin Column -->
+        <ng-container matColumnDef="fechaFin">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Fin</th>
+          <td mat-cell *matCellDef="let row">{{ row.fechaFin | date:'shortDate' }}</td>
+        </ng-container>
+
+        <!-- Resultado Column -->
+        <ng-container matColumnDef="resultado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Resultado</th>
+          <td mat-cell *matCellDef="let row">{{ row.resultado }}</td>
+        </ng-container>
+
+        <!-- Lider Column -->
+        <ng-container matColumnDef="lider">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Líder</th>
+          <td mat-cell *matCellDef="let row">{{ row.lider.nombre }} {{ row.lider.apellido }}</td>
+        </ng-container>
+
+        <!-- Miembros Column -->
+        <ng-container matColumnDef="miembros">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Miembros</th>
+          <td mat-cell *matCellDef="let row">
+            <ul>
+              <li *ngFor="let miembro of row.miembros">
+                {{ miembro.nombre }} {{ miembro.apellido }}
+              </li>
+            </ul>
+          </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button (click)="editProject(row)" mat-icon-button color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteProject(row.id)" mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button (click)="openDetail(row)" mat-icon-button color="primary">
+              <mat-icon>info</mat-icon>
+            </button>
+              <button mat-icon-button *ngIf="showAddButton" (click)="openDialogActivities(row.id)" color="primary">
+                <mat-icon>assignment_turned_in</mat-icon>
+              </button>
+              <button mat-icon-button [routerLink]="['/activities', row.id]" color="primary">
+                <mat-icon>assignment</mat-icon>
+              </button>
+
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- No Data Row -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="12">No se encontraron proyectos que coincidan con "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+    </div>
+  </div>
+</div>

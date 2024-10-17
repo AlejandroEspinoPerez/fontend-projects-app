@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 
@@ -10,39 +10,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  userdata: any;
 
-  userdata:any;
-  constructor(private builder: FormBuilder,private toast:ToastrService ,private service:ApiService,private router:Router) {
-      sessionStorage.clear();
+  constructor(
+    private builder: FormBuilder,
+    private toast: ToastrService,
+    private service: ApiService,
+    private router: Router
+  ) {
+    sessionStorage.clear();
   }
 
-  loginform=this.builder.group({
-    username:this.builder.control('',Validators.required),
-      password:this.builder.control('',Validators.required),
-  })
+  // Definimos el formulario de inicio de sesión
+  loginform = this.builder.group({
+    nombre: this.builder.control('', Validators.required),
+    password: this.builder.control('', Validators.required),
+  });
 
-
-  prosederLogin(){
-    console.log('loguin function')
-    if(this.loginform.valid){
-
-      
-    this.service.getbycode(this.loginform.value.username).subscribe(res=>{
-        this.userdata=res;
-        console.log(this.userdata);
-        if(this.userdata.password===this.loginform.value.password){
-            if(this.userdata.isactive){
-                sessionStorage.setItem('username',this.userdata.id);
-                sessionStorage.setItem('userrole',this.userdata.role);
+  // Método para proceder al inicio de sesión
+  procederLogin() {
+    if (this.loginform.valid) {
+      const nombre = this.loginform.value.nombre ?? '';
+      this.service.getByNombre(nombre).subscribe(
+        (res: any) => {
+          this.userdata = res;
+          if (this.userdata) {
+            if (this.userdata.password === this.loginform.value.password) {
+              if (this.userdata.isActive) {
+                sessionStorage.setItem('username', this.userdata.id);
+                sessionStorage.setItem('userrole', this.userdata.rol);
                 this.router.navigate(['dashboard']);
-
-            }else{
-              this.toast.error('Por favor contactar al admin','No esta activado aun')
+              } else {
+                this.toast.error('Por favor contactar al admin', 'No está activado aún');
+              }
+            } else {
+              this.toast.error('Contraseña incorrecta');
             }
-        }else{
-          this.toast.error('Contraseña incorrecta')
+          } else {
+            this.toast.error('Usuario no encontrado');
+          }
+        },
+        (error: any) => {
+          this.toast.error('Error en la conexión', 'Por favor intenta más tarde');
         }
-    });
+      );
+    } else {
+      this.toast.warning('Por favor complete todos los campos requeridos');
+    }
   }
-
-}}
+}

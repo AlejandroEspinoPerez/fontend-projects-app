@@ -10,15 +10,17 @@ import { UserlistingComponent } from "./userlisting/userlisting.component";
 import { AuthGuard } from './guard/auth.guard';
 import { AncianoComponent } from './ancianosComponents/anciano/anciano.component';
 import { ContactosComponent } from './contactosComponents/contactos/contactos.component';
-import { EnfermedadesComponent } from './enfermedadesComponents/enfermedades/enfermedades.component';
+import { ActivitiesComponent } from './enfermedadesComponents/activities/activities.component';
+import { ProjectsComponent } from './projectsComponents/projects/projects.component';
 
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', title: 'Dashboard', component: DashboardComponent },
   { path: 'anciano', title: 'Anciano', component: AncianoComponent, canActivate: [AuthGuard] },
+  { path: 'projects', title: 'Projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'contactos', title: 'Contactos', component: ContactosComponent, canActivate: [AuthGuard] },
-  { path: 'enfermedades', title: 'Enfermedades', component: EnfermedadesComponent, canActivate: [AuthGuard] },
+  { path: 'activities/:id', title: 'Actividades', component: ActivitiesComponent, canActivate: [AuthGuard] },
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'register', title: 'Registro', component: RegisterComponent },
   { path: 'userlisting', title: 'Usuarios', component: UserlistingComponent, canActivate: [AuthGuard] },

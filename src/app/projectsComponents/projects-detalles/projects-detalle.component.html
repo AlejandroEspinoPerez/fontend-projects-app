@@ -1,0 +1,60 @@
+<mat-dialog-content class="dialog-content">
+  <!-- Título del proyecto -->
+  <h2 mat-dialog-title class="dialog-title">{{ data.nombre }}</h2>
+
+  <mat-divider></mat-divider>
+
+  <!-- Sección de información general -->
+  <div class="container">
+    <div class="general-info">
+      <mat-list class="info-list">
+        <mat-list-item>
+          <p><strong>Descripción:</strong> {{ data.descripcion }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Tipo:</strong> {{ data.tipo }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Localidad:</strong> {{ data.localidad }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Objetivos:</strong> {{ data.objetivos }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Presupuesto:</strong> {{ data.presupuesto | currency }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Fecha de Inicio:</strong> {{ data.fechaInicio | date }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Fecha de Fin:</strong> {{ data.fechaFin | date }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Resultado:</strong> {{ data.resultado }}</p>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <!-- Sección de líder del proyecto -->
+    <div class="leader-box" *ngIf="lider">
+      <h3 class="leader-title">Líder del Proyecto</h3>
+      <p><strong>Líder:</strong> {{ lider.nombre }} {{ lider.apellido }}</p>
+    </div>
+
+    <!-- Sección de miembros -->
+    <div class="members-box" *ngIf="miembros.length > 0">
+      <h3 class="members-title">Miembros del Proyecto</h3>
+      <ul class="miembros-list">
+        <li *ngFor="let miembro of miembros">
+          {{ miembro.nombre }} {{ miembro.apellido }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="primary" class="close-button">Cerrar</button>
+</mat-dialog-actions>

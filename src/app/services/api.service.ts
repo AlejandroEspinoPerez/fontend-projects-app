@@ -14,15 +14,130 @@ export class ApiService {
 
 
   // NUEVAS URLs para Cátedra Adulto Mayor======================================================================
-  apiurlUser = 'http://localhost:8000/api/users/'; // Cambia esta URL a tu endpoint real
+  //apiurlUser = 'http://localhost:8000/api/users/'; // Cambia esta URL a tu endpoint real
 
+
+  apiurlUser = 'http://localhost:3000/users/';
+  apiurlProjects = 'http://localhost:3000/projects/'
+  apiurlActivities = 'http://localhost:3000/activities/'
   apiurlAncianos = 'http://localhost:8000/api/ancianos/';
   apiurlContactosEmergencia = 'http://localhost:8000/api/contactos/';
   apiurlEnfermedades = 'http://localhost:8000/api/enfermedades/';
 
-  // Métodos para consumir la API de adulto mayor===========================================================
-  // Ancianos
-  getAllAncianos(): Observable<Anciano[]> {  // Especificamos que la respuesta es un array de Anciano
+  //  Métodos para manejar usuarios
+    //Accesos a la user list ==============================
+    // Registrar un nuevo usuario
+    prosederRegister(data: any): Observable<any> {
+      return this.http.post(this.apiurlUser, data);
+  }
+
+  // **Obtener usuario por nombre**
+  getByNombre(nombre: string): Observable<any> {
+    return this.http.get(`${this.apiurlUser}nombre/${nombre}`);
+  }
+
+  // **Obtener usuario por ID**
+  getById(userId: number): Observable<any> {
+    return this.http.get(`${this.apiurlUser}id/${userId}`);
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.apiurlUser}${userId}`);
+  }
+
+    postCantUser(data: any) {
+      return this.http.post("http://localhost:8000/api/cantidades", data);
+    }
+
+    // Obtener todos los usuarios
+    getAllUser(): Observable<any> {
+      return this.http.get(this.apiurlUser);
+    }
+
+    // Obtener todos los roles
+    getAllRole(): Observable<any> {
+      return this.http.get("http://localhost:8000/api/roles/");
+    }
+
+
+
+    // Actualizar un usuario existente
+    updateUser(data: any, code: any): Observable<any> {
+      return this.http.put<any>(`${this.apiurlUser}${code}/`, data);
+    }
+
+    // Obtener accesos por rol y menú
+    getAccessbyRole(role: any, menu: any): Observable<any> {
+      return this.http.get(`http://localhost:8000/api/roleaccess?role=${role}&menu=${menu}`);
+    }
+
+    // Verificar si el usuario está logueado
+    IsloggedIn(): boolean {
+      return sessionStorage.getItem('username') != null;
+    }
+
+    // Obtener rol del usuario desde el almacenamiento
+    getUserrole(): string {
+      return sessionStorage.getItem('userrole')?.toString() ?? '';
+  }
+
+  //=========================================== Projects
+  getAllProjects(): Observable<any> {
+    return this.http.get<any>(this.apiurlProjects);
+  }
+
+  // Método para obtener un proyecto por su ID
+  getProjectById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiurlProjects}${id}/`);
+  }
+
+  postProjects(data: any) {
+    return this.http.post<any>(this.apiurlProjects, data);
+  }
+
+  putProjects(data: any, id: number) {
+    return this.http.put<any>(`${this.apiurlProjects}${id}/`, data);
+  }
+
+  deleteProjects(id: number) {
+    return this.http.delete<any>(`${this.apiurlProjects}${id}/`);
+  }
+
+
+  //=========================================== Activities
+  // Método para obtener actividades por ID de proyecto
+  // Método para obtener actividades por ID de proyecto
+  getActivitiesByProjectId(projectId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiurlActivities}project/${projectId}`);
+  }
+
+
+  getAllActivities(): Observable<any> {
+    return this.http.get<any>(this.apiurlActivities);
+  }
+
+  postActivities(data: any) {
+    return this.http.post<any>(this.apiurlActivities, data);
+  }
+
+  putActivities(data: any, id: number) {
+    return this.http.put<any>(`${this.apiurlActivities}${id}/`, data);
+  }
+
+  deleteActivities(id: number) {
+    return this.http.delete<any>(`${this.apiurlActivities}${id}/`);
+  }
+
+
+
+
+
+
+
+
+
+  //=========================================== Ancianos
+  getAllAncianos(): Observable<Anciano[]> {
     return this.http.get<Anciano[]>(this.apiurlAncianos);
   }
 
@@ -41,7 +156,7 @@ export class ApiService {
 
 
   // Contactos de emergencia
-  getAllContactos(): Observable<Contactos[]> {  // Especificamos que la respuesta es un array de Anciano
+  getAllContactos(): Observable<Contactos[]> {
     return this.http.get<Contactos[]>(this.apiurlContactosEmergencia);
   }
 
@@ -84,170 +199,4 @@ export class ApiService {
     return this.http.delete<any>(`${this.apiurlEnfermedades}${enfermedadId}/`);
   }
 
-
-//  Métodos para manejar usuarios
-  //Accesos a la user list ==============================
-  postCantUser(data: any) {
-    return this.http.post("http://localhost:8000/api/cantidades", data);
-  }
-
-  // Obtener todos los usuarios
-  getAllUser(): Observable<any> {
-    return this.http.get(this.apiurlUser);
-  }
-
-  // Obtener todos los roles
-  getAllRole(): Observable<any> {
-    return this.http.get("http://localhost:8000/api/roles/");
-  }
-
-  // Obtener usuario por código
-  getbycode(code: any): Observable<any> {
-    return this.http.get(`${this.apiurlUser}${code}/`);
-  }
-
-  // Registrar un nuevo usuario
-  prosederRegister(data: any): Observable<any> {
-    return this.http.post(this.apiurlUser, data);
-  }
-
-  // Actualizar un usuario existente
-  updateUser(data: any, code: any): Observable<any> {
-    return this.http.put<any>(`${this.apiurlUser}${code}/`, data);
-  }
-
-  // Obtener accesos por rol y menú
-  getAccessbyRole(role: any, menu: any): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/roleaccess?role=${role}&menu=${menu}`);
-  }
-
-  // Verificar si el usuario está logueado
-  IsloggedIn(): boolean {
-    return sessionStorage.getItem('username') != null;
-  }
-
-  // Obtener rol del usuario desde el almacenamiento
-  getUserrole(): string {
-    return sessionStorage.getItem('userrole')?.toString() ?? '';
-  }
-
-
-
-
-
-
-
-
-  
-
-
-  // //Accesos a la user list ==============================
-  // postCantUser(data:any){
-    //   return this.http.post("http://localhost:3000/cantidades",data);
-    // }
-
-    // getAllUser(){
-      //   return this.http.get(this.apiurluser);
-      // }
-      // getAllRole(){
-        //   return this.http.get(this.apiurlrole);
-        // }
-        // getbycode(code:any){
-          //   return this.http.get(this.apiurluser+code);
-          // }
-  // prosederRegister(data:any){
-  //   return this.http.post(this.apiurluser,data);
-  // }
-  // updateUser(data:any,code:any){
-  //   return this.http.put<any>(this.apiurluser + code ,data);
-  // }
-  // IsloggedIn(){
-  //   return sessionStorage.getItem('username')!=null;
-  // }
-  // getUserrole(){
-  //   return sessionStorage.getItem('userrole')!=null?sessionStorage.getItem('userrole')?.toString():'';
-  // }
-  // //obtener los accesos por roles ===========================
-  // getAccessbyRole(role:any,menu:any){
-  //   return this.http.get('https://residencia.onrender.com/roleacces?role='+role+'&menu='+menu);
-  // }
-
-  apiurlBase='https://residencia.onrender.com/';
-  //apiurluser='https://residencia.onrender.com/userList/';
-  apiurlrole='https://residencia.onrender.com/role/';
-  apiurlresidencia='https://residencia.onrender.com/residenciaList/';
-  apiurlapto='https://residencia.onrender.com/apartamentoList/';
-  apiurlbecado='https://residencia.onrender.com/becadoList/';
-  apiurlcantidades = 'https://residencia.onrender.com/cantidades/';
-
-
-        //Accesos a la residencia ==============================
-        getAllResidencia(){
-          return this.http.get(this.apiurlresidencia);
-        }
-        postResidencia(data:any){
-          return this.http.post<any>(this.apiurlresidencia,data);
-        }
-        getResidencia(){
-          return this.http.get<any>(this.apiurlresidencia);
-        }
-        putResidencia(data:any,id : number){
-          return this.http.put<any>(this.apiurlresidencia+id ,data);
-        }
-        deleteResidencia(id:number){
-            return this.http.delete<any>(this.apiurlresidencia+id);
-        }
-
-
-
-  //Accesos a la apto ==============================
-  getAllApto(){
-    return this.http.get(this.apiurlapto);
-  }
-  postApto(data:any){
-    return this.http.post<any>(this.apiurlapto,data);
-  }
-  getApto(){
-    return this.http.get<any>(this.apiurlapto);
-  }
-  putApto(data:any,id : number){
-    return this.http.put<any>(this.apiurlapto+id ,data);
-  }
-  deleteApto(id:number){
-      return this.http.delete<any>(this.apiurlapto+id);
-  }
-
-
-
-
-
-  //Accesos a becados ==============================
-  getAllBecado(){
-    return this.http.get(this.apiurlbecado);
-  }
-  postBecado(data:any){
-    return this.http.post<any>(this.apiurlbecado,data);
-  }
-  getBecado(){
-    return this.http.get<any>(this.apiurlbecado);
-  }
-  putBecado(data:any,id : number){
-    return this.http.put<any>(this.apiurlbecado+id ,data);
-  }
-  deleteBecado(id:number){
-      return this.http.delete<any>(this.apiurlbecado+id);
-  }
-
-
-
-
-  getAll(){
-    return this.http.get(this.apiurlBase);
-  }
-
-  getTotalRegistros(entidad:string):Observable<number>{
-    const url='${this.apiurlBase}/${entidad}?_total';
-    return this.http.get<{_total:number}>(url).pipe(map(res=>res._total));
-
-  }
 }

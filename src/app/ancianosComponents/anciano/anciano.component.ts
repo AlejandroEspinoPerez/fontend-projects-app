@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { DialogEnfermedadComponent } from '../../enfermedadesComponents/dialog-enfermedad/dialog-enfermedad.component';
+import { DialogActivitiesComponent } from '../../enfermedadesComponents/dialog-activities/dialog-activities.component';
 import { Anciano } from '../../Models/anciano.model'
 import { DialogContactosComponent } from '../../contactosComponents/dialogContacto/dialog-contactos.component';
 import { AncianoDetalleComponent } from '../anciano-detalles/anciano-detalle.component';
@@ -78,7 +78,7 @@ export class AncianoComponent {
 
   openDialogEnfermedad(ancianoId: number): void {
     if (this.haveadd) {
-      const dialogRef = this.dialog.open(DialogEnfermedadComponent, {
+      const dialogRef = this.dialog.open(DialogActivitiesComponent, {
         width: '50%',
         data: { ancianoId } // Pasar el ID del anciano
       });

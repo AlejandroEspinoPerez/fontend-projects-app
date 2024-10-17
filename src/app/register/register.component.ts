@@ -16,14 +16,10 @@ export class RegisterComponent {
   }
 
   registerform = this.builder.group({
-    id: this.builder.control('', Validators.required),
-    name: this.builder.control('', Validators.required),
-
-    password:this.builder.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
-    email: this.builder.control('', Validators.compose([Validators.required, Validators.email])),
-    gender: this.builder.control('hombre'),
-    role: this.builder.control(''),
-    isactive: this.builder.control(false)
+    nombre: this.builder.control('', Validators.required), // Campo para nombre
+    apellido: this.builder.control('', Validators.required), // Campo para apellido
+    password: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
+    email: this.builder.control('', Validators.compose([Validators.required, Validators.email]))
   });
     pruebaForm=this.builder.group({
       id: this.builder.control(''),
@@ -31,16 +27,30 @@ export class RegisterComponent {
     })
 
 
-  prosederRegister(){
-    if(this.registerform.valid){
-        this.service.prosederRegister(this.registerform.value).subscribe(res=>{
-          this.toast.success('Por favor contacta con el admin para activar su acceso','Registrado correctamente');
+  prosederRegister() {
+    if (this.registerform.valid) {
+      const newUser = {
+        nombre: this.registerform.value.nombre,
+        apellido: this.registerform.value.apellido,
+        email: this.registerform.value.email,
+        password: this.registerform.value.password
+      };
+
+      this.service.prosederRegister(newUser).subscribe(
+        res => {
+          this.toast.success('Por favor contacta con el admin para activar tu acceso', 'Registrado correctamente');
           this.router.navigate(['login']);
-        });
-    }else{
-        this.toast.warning('Por favor introduzca datos correctos')
+        },
+        error => {
+          this.toast.error('Error al registrar el usuario: ' + error.message, 'Error');
+        }
+      );
+    } else {
+      this.toast.warning('Por favor introduce datos correctos');
     }
   }
+
+
 
 
 

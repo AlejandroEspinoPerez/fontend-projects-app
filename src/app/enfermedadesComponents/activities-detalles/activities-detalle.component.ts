@@ -2,10 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-anciano-detalle',
-  templateUrl: './enfermedades-detalle.component.html',
-  styleUrls: ['./enfermedades-detalle.component.scss']
+  selector: 'app-activities-detalle',
+  templateUrl: './activities-detalle.component.html',
+  styleUrls: ['./activities-detalle.component.scss']
 })
-export class EnfermedadesDetalleComponent {
+export class ActivitiesDetalleComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 }

@@ -5,9 +5,9 @@ export const navbarData = [
         label: 'Dashboard'
     },
     {
-        routeLink: 'residencia',
+        routeLink: 'projects',
         icon: 'fal fa-university',
-        label: 'Residencia'
+        label: 'Proyectos'
   },
   {
     routeLink: 'anciano',
@@ -15,25 +15,15 @@ export const navbarData = [
     label: 'Ancianos'
   },
   {
-    routeLink: 'enfermedades',
+    routeLink: 'activities',
     icon: 'fal fa-virus',
-    label: 'Enfermedades'
+    label: 'Actividades'
   },
   {
     routeLink: 'contactos',
     icon: 'fal fa-address-book',
     label: 'Contactos'
   },
-    {
-      routeLink: 'apartamento',
-      icon: 'fal fa-chart-bar ',
-      label: 'Apartamento'
-    },
-    {
-        routeLink: 'becado',
-        icon: 'fa fa-address-card',
-        label: 'Becado'
-    },
     {
         routeLink: 'userlisting',
         icon: 'fal fa-cog',

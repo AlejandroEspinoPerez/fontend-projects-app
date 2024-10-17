@@ -17,16 +17,16 @@
       </a>
     </li>
 
-    <!--Icono del Anciano -->
+    <!--Icono del Proyectos -->
     <li class="sidenav-nav-item">
-      <a class="sidenav-nav-link" routerLink="anciano" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}">
+      <a class="sidenav-nav-link" routerLink="projects" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <i class="sidenav-link-icon icon-sidenav fa fa-user-circle"></i>
-        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Anciano</span>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Proyectos</span>
       </a>
     </li>
 
-      <!--Icono del Contacto -->
+
+    <!--Icono del Contacto -->
       <li class="sidenav-nav-item">
         <a class="sidenav-nav-link" routerLink="contactos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <i class="sidenav-link-icon icon-sidenav fal fa-address-card"></i>
@@ -34,13 +34,13 @@
         </a>
       </li>
 
-      <!--Icono del Contacto -->
+      <!-- Icono del Contacto
       <li class="sidenav-nav-item">
-        <a class="sidenav-nav-link" routerLink="enfermedades" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="sidenav-nav-link" routerLink="activities" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <i class="sidenav-link-icon icon-sidenav fal fa fa-bed"></i>
-          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Enfermedad</span>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Actividad</span>
         </a>
-      </li>
+      </li> -->
 
     <li class="sidenav-nav-item" *ngIf="isAdmin" >
       <a class="sidenav-nav-link" routerLink="userlisting" routerLinkActive="active"
@@ -52,11 +52,11 @@
 
     <li class="sidenav-nav-item" >
       <a class="sidenav-nav-link" routerLink="login" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}">
-        <i class="sidenav-link-icon icon-sidenav fal fa-sign-out" ></i>
-        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Salir</span>
-      </a>
-    </li>
+      [routerLinkActiveOptions]="{exact: true}">
+      <i class="sidenav-link-icon icon-sidenav fal fa-sign-out" ></i>
+      <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Salir</span>
+    </a>
+  </li>
 
     <li class="sidenav-nav-item switch">
       <mat-slide-toggle  thumbIcon (ngModelChange)="onChange($event)" ngModel="isdarkThemeActive"></mat-slide-toggle>
@@ -68,3 +68,11 @@
 
 
 </div>
+  <!-- Icono del Anciano
+  <li class="sidenav-nav-item">
+    <a class="sidenav-nav-link" routerLink="anciano" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      <i class="sidenav-link-icon icon-sidenav fa fa-user-circle"></i>
+      <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Anciano</span>
+    </a>
+  </li> -->

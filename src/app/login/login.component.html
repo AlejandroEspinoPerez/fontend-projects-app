@@ -4,10 +4,10 @@
   </mat-card-header>
 
   <mat-card-content class="card_content">
-    <form class="example-form" [formGroup]="loginform" (ngSubmit)="prosederLogin()">
+    <form class="example-form" [formGroup]="loginform" (ngSubmit)="procederLogin()">
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Nombre de Usario</mat-label>
-        <input matInput formControlName="username" />
+        <mat-label>Nombre de Usuario</mat-label>
+        <input matInput formControlName="nombre" />
         <mat-icon matSuffix>account_circle</mat-icon>
       </mat-form-field>
 
@@ -18,8 +18,8 @@
       </mat-form-field>
 
       <div class="botones">
-        <button mat-raised-button color="primary">Submit</button>
-        <a class="botones" routerLink="/register" mat-raised-button color="accent">Nuevo usuario?</a>
+        <button class="boton" mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+        <a routerLink="/register" mat-raised-button color="accent">Nuevo usuario?</a>
       </div>
     </form>
   </mat-card-content>

@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   display: flex;
-  width: 30%;
-  height: 350px;
+  width: 40%;
+  height: 500px;
   border-radius: 20px;
 margin: 0 auto;
 margin-top: 10%;
@@ -15,11 +15,16 @@ gap: 10px;
   width: 100%;
 }
 .botones{
-  margin:0 auto ;
+  margin:5px auto ;
   display: flex;
   flex-direction: row;
   align-items: center;
 
+}
+
+.boton{
+  padding: 10px;
+  margin: 10px;
 }
 
 

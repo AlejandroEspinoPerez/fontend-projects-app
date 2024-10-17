@@ -1,9 +1,8 @@
-import { Component, OnInit,Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { MAT_DIALOG_DATA,MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-updatepopup',
@@ -11,51 +10,67 @@ import { DialogRef } from '@angular/cdk/dialog';
   styleUrls: ['./updatepopup.component.css']
 })
 export class UpdatepopupComponent implements OnInit {
-  rolelist:any;
+  rolelist: string[] = ['jefe', 'líder', 'miembro']; // Lista de roles fijos
+  editdata: any; // Datos del usuario a editar
+  registerform: FormGroup; // Formulario reactivo
 
-  constructor(private builder:FormBuilder ,private service:ApiService,
-    @Inject(MAT_DIALOG_DATA) public data:any ,private toast:ToastrService,private dialog:MatDialogRef<UpdatepopupComponent>){
+  constructor(
+    private builder: FormBuilder,
+    private service: ApiService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private toast: ToastrService,
+    private dialog: MatDialogRef<UpdatepopupComponent>
+  ) {
+    // Inicialización del formulario
+    this.registerform = this.builder.group({
+      id: [{ value: '', disabled: true }], // Deshabilitado
+      nombre: [{ value: '', disabled: true }], // Deshabilitado
+      email: [{ value: '', disabled: true }], // Deshabilitado
+      rol: ['', Validators.required], // Editable solo el rol
+      isActive: [false] // Editable el estado de activación
+    });
+  }
 
-    }
-
-    editdata:any;
   ngOnInit(): void {
-      this.service.getAllRole().subscribe(res=>{
-          this.rolelist=res;
-      })
-
-      if(this.data.usercode!=null && this.data.usercode!=''){
-        this.service.getbycode(this.data.usercode).subscribe(res=>{
-            this.editdata=res;
-            this.registerform.setValue({id:this.editdata.id,name:this.editdata.name,email:this.editdata.email,password:this.editdata.password,role:this.editdata.role,gender:this.editdata.gender,isactive:this.editdata.isactive})
-        })
-
-      }
-  }
-  registerform = this.builder.group({
-    id: this.builder.control(''),
-    name: this.builder.control(''),
-
-    password:this.builder.control(''),
-    email: this.builder.control(''),
-    gender: this.builder.control('hombre'),
-    role: this.builder.control('',Validators.required),
-    isactive: this.builder.control(false)
-  });
-
-  updateuser(){
-    
-    console.log("hola");
-      if(this.registerform.valid){
-          this.service.updateUser(this.registerform.value,this.registerform.value.id).subscribe(res=>{
-            this.toast.success("Actualizado Correctamente");
-            this.dialog.close();
-          console.log(res);
-          });
-
-      }else{
-        this.toast.warning("Por favor selecciona algun rol");
-      }
+    // Si se recibió un ID de usuario, cargar sus datos
+    if (this.data.usercode) {
+      this.service.getById(this.data.usercode).subscribe(res => {
+        this.editdata = res;
+        this.registerform.patchValue({
+          id: this.editdata.id,
+          nombre: this.editdata.nombre, // Campo correcto
+          email: this.editdata.email,
+          rol: this.editdata.rol,
+          isActive: this.editdata.isActive // Asegurar que coincida
+        });
+      });
+    }
   }
 
+  updateuser() {
+    if (this.registerform.valid) {
+      // Preparar los datos para la actualización
+      const updatedData = {
+        nombre: this.editdata.nombre, // No se modifica
+        apellido: this.editdata.apellido, // No se modifica
+        email: this.editdata.email, // No se modifica
+        password: this.editdata.password, // No se modifica
+        rol: this.registerform.value.rol, // Actualizar rol
+        isActive: this.registerform.value.isActive // Actualizar estado
+      };
+
+      // Llamada al servicio para actualizar el usuario
+      this.service.updateUser(updatedData, this.editdata.id).subscribe({
+        next: () => {
+          this.toast.success('Usuario actualizado correctamente.');
+          this.dialog.close();
+        },
+        error: () => {
+          this.toast.error('Error al actualizar el usuario.');
+        }
+      });
+    } else {
+      this.toast.warning('Por favor, completa todos los campos requeridos.');
+    }
+  }
 }

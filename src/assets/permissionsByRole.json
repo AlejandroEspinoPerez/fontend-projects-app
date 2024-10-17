@@ -1,0 +1,20 @@
+{
+  "jefe": {
+    "canViewReports": true,
+    "canManageProjects": false
+  },
+  "admin": {
+    "canViewReports": true,
+    "canManageProjects": true,
+    "canManageUsers": true
+  },
+  "lider": {
+    "canManageTasks": true,
+    "canManageMembers": true,
+    "canManageMaterials": true,
+    "canUpdateBudget": true
+  },
+  "miembro": {
+    "canViewTasks": true
+  }
+}

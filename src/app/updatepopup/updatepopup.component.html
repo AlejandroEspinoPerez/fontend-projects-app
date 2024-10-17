@@ -4,33 +4,28 @@
   </mat-card-header>
 
   <mat-card-content class="card_content">
-    <form
-      class="example-form"
-      [formGroup]="registerform"
-      (ngSubmit)="updateuser()"
-    >
+    <form [formGroup]="registerform" (ngSubmit)="updateuser()">
 
-  <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="role">
+      <!-- Selección de rol -->
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+          <mat-option value="">Seleccionar Rol</mat-option>
+          <mat-option *ngFor="let role of rolelist" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-option  value="">Select Role</mat-option>
-    <mat-option *ngFor="let item of rolelist" [value]="item.code">
-      {{item.name}}
-    </mat-option>
-
-  </mat-select>
-        <mat-icon  style="color:blueviolet" matSuffix>account_circle</mat-icon>
-  </mat-form-field>
-
+      <!-- Activar/Desactivar usuario -->
       <div>
-
-           <mat-checkbox  formControlName="isactive" class="example-margin">Es Activo</mat-checkbox>
+        <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
       </div>
 
+      <!-- Botones -->
       <div class="botones">
-        <button  type="submit" onclick="updateuser()" mat-raised-button color="primary">Actualizar</button>
-        <a class="botones" mat-raised-button  mat-dialog-close color="accent">Cerrar</a>
+        <button type="submit" mat-raised-button color="primary">Actualizar</button>
+        <button mat-raised-button mat-dialog-close color="accent">Cerrar</button>
       </div>
     </form>
   </mat-card-content>
