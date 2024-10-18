@@ -1,28 +1,70 @@
 <mat-dialog-content class="dialog-content">
-  <!-- Título con el nombre de la enfermedad -->
-  <h2 mat-dialog-title class="dialog-title">{{ data.nombre_enfermedad }}</h2>
+  <!-- Título con el nombre de la actividad -->
+  <h2 mat-dialog-title class="dialog-title">{{ data.nombre }}</h2>
 
   <!-- División -->
   <mat-divider></mat-divider>
 
   <!-- Información general -->
   <div class="container">
-    <!-- Mostrar el nombre del anciano -->
+    <!-- Mostrar la descripción de la actividad -->
     <div class="general-info">
-      <p><strong>Enfermedad correspondiente al anciano:</strong> {{ data.anciano_nombre }}</p>
+      <p><strong>Descripción de la actividad:</strong> {{ data.descripcion }}</p>
+      <p><strong>Fecha de inicio:</strong> {{ data.fechaInicio }}</p>
+      <p><strong>Fecha de fin:</strong> {{ data.fechaFin }}</p>
+      <p><strong>Responsable:</strong> {{ data.responsable.nombre }} {{ data.responsable.apellido }}</p>
+
+
     </div>
 
-    <!-- Detalles de la enfermedad -->
+    <!-- Fechas de inicio y fin de la actividad
     <div class="general-info">
       <mat-list class="info-list">
         <mat-list-item>
-          <p><strong>Diagnóstico:</strong> {{ data.fecha_diagnostico }}</p>
+          <p><strong>Fecha de inicio:</strong> {{ data.fechaInicio }}</p>
         </mat-list-item>
         <mat-list-item>
-          <p><strong>Descripción:</strong> {{ data.descripcion }}</p>
+          <p><strong>Fecha de fin:</strong> {{ data.fechaFin }}</p>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+
+    <div class="general-info">
+      <mat-list class="info-list">
+        <mat-list-item>
+          <p><strong>Responsable:</strong> {{ data.responsable.nombre }} {{ data.responsable.apellido }}</p>
+        </mat-list-item>
+      </mat-list>
+    </div>-->
+
+    <!-- Información del proyecto -->
+    <div class="general-info">
+      <h3>Información del proyecto</h3>
+      <mat-list class="info-list">
+        <mat-list-item>
+          <p><strong>Nombre del proyecto:</strong> {{ data.proyecto.nombre }}</p>
         </mat-list-item>
         <mat-list-item>
-          <p><strong>Medicamento:</strong> {{ data.medicamento }}</p>
+          <p><strong>Descripción del proyecto:</strong> {{ data.proyecto.descripcion }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Tipo de proyecto:</strong> {{ data.proyecto.tipo }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Presupuesto del proyecto:</strong> {{ data.proyecto.presupuesto | currency }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Localidad:</strong> {{ data.proyecto.localidad }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Resultado esperado:</strong> {{ data.proyecto.resultado }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Fecha de inicio del proyecto:</strong> {{ data.proyecto.fechaInicio | date:'longDate' }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Fecha de fin del proyecto:</strong> {{ data.proyecto.fechaFin | date:'longDate' }}</p>
         </mat-list-item>
       </mat-list>
     </div>

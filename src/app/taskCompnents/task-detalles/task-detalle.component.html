@@ -1,28 +1,55 @@
 <mat-dialog-content class="dialog-content">
-  <!-- Título con el nombre de la enfermedad -->
-  <h2 mat-dialog-title class="dialog-title">{{ data.nombre_enfermedad }}</h2>
+  <!-- Título con el nombre de la tarea -->
+  <h2 mat-dialog-title class="dialog-title">{{ data.nombre }}</h2>
 
   <!-- División -->
   <mat-divider></mat-divider>
 
-  <!-- Información general -->
+  <!-- Información general de la tarea -->
   <div class="container">
-    <!-- Mostrar el nombre del anciano -->
     <div class="general-info">
-      <p><strong>Enfermedad correspondiente al anciano:</strong> {{ data.anciano_nombre }}</p>
+      <p><strong>Descripción de la tarea:</strong> {{ data.descripcion }}</p>
+      <p><strong>Fecha de inicio:</strong> {{ data.fechaInicio }}</p>
+      <p><strong>Fecha de fin:</strong> {{ data.fechaFin }}</p>
+        <p><strong>Responsable:</strong> {{ data.responsable.nombre }} {{ data.responsable.apellido }}</p>
     </div>
 
-    <!-- Detalles de la enfermedad -->
+    <!-- Fechas de la tarea
     <div class="general-info">
       <mat-list class="info-list">
         <mat-list-item>
-          <p><strong>Diagnóstico:</strong> {{ data.fecha_diagnostico }}</p>
+          <p><strong>Fecha de inicio:</strong> {{ data.fechaInicio }}</p>
         </mat-list-item>
         <mat-list-item>
-          <p><strong>Descripción:</strong> {{ data.descripcion }}</p>
+          <p><strong>Fecha de fin:</strong> {{ data.fechaFin }}</p>
+        </mat-list-item>
+      </mat-list>
+    </div> -->
+
+    <!-- Responsable de la tarea
+    <div class="general-info">
+      <mat-list class="info-list">
+        <mat-list-item>
+          <p><strong>Responsable:</strong> {{ data.responsable.nombre }} {{ data.responsable.apellido }}</p>
+        </mat-list-item>
+      </mat-list>
+    </div> -->
+
+    <!-- Información de la actividad relacionada -->
+    <div class="general-info">
+      <h3>Información de la actividad relacionada</h3>
+      <mat-list class="info-list">
+        <mat-list-item>
+          <p><strong>Nombre de la actividad:</strong> {{ data.actividad.nombre }}</p>
         </mat-list-item>
         <mat-list-item>
-          <p><strong>Medicamento:</strong> {{ data.medicamento }}</p>
+          <p><strong>Descripción de la actividad:</strong> {{ data.actividad.descripcion }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Fecha de inicio de la actividad:</strong> {{ data.actividad.fechaInicio }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p><strong>Fecha de fin de la actividad:</strong> {{ data.actividad.fechaFin }}</p>
         </mat-list-item>
       </mat-list>
     </div>
