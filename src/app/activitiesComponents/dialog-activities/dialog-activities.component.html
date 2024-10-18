@@ -1,24 +1,32 @@
 <div class="container1">
-  <h1 mat-dialog-title>{{ actionButton === 'SAVE' ? 'Adicionar Actividad' : 'Editar Actividad' }}</h1>
+  <h1 mat-dialog-title>{{ actionButton === 'SAVE' ? 'Adicionar Actividad al proyecto ' + editData.projectName : 'Editar Actividad del proyecto ' + editData.projectName }}</h1>
 
   <div mat-dialog-content>
     <form [formGroup]="actividadForm">
       <mat-form-field class="input" appearance="outline">
         <mat-label>Nombre de la Actividad</mat-label>
         <input matInput type="text" formControlName="nombre" placeholder="Escribe el nombre de la actividad..">
+        <mat-error *ngIf="actividadForm.get('nombre')?.invalid && actividadForm.get('nombre')?.touched">
+          El nombre de la actividad es requerido.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="input" appearance="outline">
         <mat-label>Descripción</mat-label>
         <textarea matInput formControlName="descripcion" placeholder="Escribe una descripción.."></textarea>
+        <mat-error *ngIf="actividadForm.get('descripcion')?.invalid && actividadForm.get('descripcion')?.touched">
+          La descripción es requerida.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="input" appearance="outline">
         <mat-label>Fecha de Inicio</mat-label>
-        <input matInput [matDatepicker]="inicioPicker" formControlName="fechaInicio"
-          placeholder="Elige la fecha de inicio..">
+        <input matInput [matDatepicker]="inicioPicker" formControlName="fechaInicio" placeholder="Elige la fecha de inicio..">
         <mat-datepicker-toggle matSuffix [for]="inicioPicker"></mat-datepicker-toggle>
         <mat-datepicker #inicioPicker></mat-datepicker>
+        <mat-error *ngIf="actividadForm.get('fechaInicio')?.invalid && actividadForm.get('fechaInicio')?.touched">
+          La fecha de inicio es requerida.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="input" appearance="outline">
@@ -26,6 +34,9 @@
         <input matInput [matDatepicker]="finPicker" formControlName="fechaFin" placeholder="Elige la fecha de fin..">
         <mat-datepicker-toggle matSuffix [for]="finPicker"></mat-datepicker-toggle>
         <mat-datepicker #finPicker></mat-datepicker>
+        <mat-error *ngIf="actividadForm.get('fechaFin')?.invalid && actividadForm.get('fechaFin')?.touched">
+          La fecha de fin es requerida.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="input" appearance="outline">
@@ -35,6 +46,9 @@
             {{ usuario.nombre }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="actividadForm.get('responsable')?.invalid && actividadForm.get('responsable')?.touched">
+          El responsable es requerido.
+        </mat-error>
       </mat-form-field>
     </form>
   </div>

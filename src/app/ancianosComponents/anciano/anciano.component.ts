@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { DialogActivitiesComponent } from '../../enfermedadesComponents/dialog-activities/dialog-activities.component';
+import { DialogActivitiesComponent } from '../../activitiesComponents/dialog-activities/dialog-activities.component';
 import { Anciano } from '../../Models/anciano.model'
 import { DialogContactosComponent } from '../../contactosComponents/dialogContacto/dialog-contactos.component';
 import { AncianoDetalleComponent } from '../anciano-detalles/anciano-detalle.component';

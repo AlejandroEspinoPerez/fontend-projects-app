@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { DialogProjectsComponent } from '../dialog-projects/dialog-projects.component';
 import { ProjectsDetalleComponent } from '../projects-detalles/projects-detalle.component';
 import { ApiService } from '../../services/api.service';
-import { DialogActivitiesComponent } from 'src/app/enfermedadesComponents/dialog-activities/dialog-activities.component';
+import { DialogActivitiesComponent } from 'src/app/activitiesComponents/dialog-activities/dialog-activities.component';
 
 @Component({
   selector: 'app-projects',

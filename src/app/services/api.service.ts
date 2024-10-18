@@ -20,6 +20,7 @@ export class ApiService {
   apiurlUser = 'http://localhost:3000/users/';
   apiurlProjects = 'http://localhost:3000/projects/'
   apiurlActivities = 'http://localhost:3000/activities/'
+  apiurlTask = 'http://localhost:3000/tasks/'
   apiurlAncianos = 'http://localhost:8000/api/ancianos/';
   apiurlContactosEmergencia = 'http://localhost:8000/api/contactos/';
   apiurlEnfermedades = 'http://localhost:8000/api/enfermedades/';
@@ -112,6 +113,11 @@ export class ApiService {
   }
 
 
+  // Método para obtener un proyecto por su ID
+  getActivityById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiurlActivities}${id}/`);
+  }
+
   getAllActivities(): Observable<any> {
     return this.http.get<any>(this.apiurlActivities);
   }
@@ -126,6 +132,30 @@ export class ApiService {
 
   deleteActivities(id: number) {
     return this.http.delete<any>(`${this.apiurlActivities}${id}/`);
+  }
+
+  //=========================================== Activities
+  // Método para obtener actividades por ID de proyecto
+  // Método para obtener actividades por ID de proyecto
+  getTaskByActivityId(activitiesId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiurlTask}activity/${activitiesId}`);
+  }
+
+
+  getAllTask(): Observable<any> {
+    return this.http.get<any>(this.apiurlTask);
+  }
+
+  postTask(data: any) {
+    return this.http.post<any>(this.apiurlTask, data);
+  }
+
+  putTask(data: any, id: number) {
+    return this.http.put<any>(`${this.apiurlTask}${id}/`, data);
+  }
+
+  deleteTask(id: number) {
+    return this.http.delete<any>(`${this.apiurlTask}${id}/`);
   }
 
 

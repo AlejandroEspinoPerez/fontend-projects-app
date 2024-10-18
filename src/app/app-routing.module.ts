@@ -10,8 +10,9 @@ import { UserlistingComponent } from "./userlisting/userlisting.component";
 import { AuthGuard } from './guard/auth.guard';
 import { AncianoComponent } from './ancianosComponents/anciano/anciano.component';
 import { ContactosComponent } from './contactosComponents/contactos/contactos.component';
-import { ActivitiesComponent } from './enfermedadesComponents/activities/activities.component';
+import { ActivitiesComponent } from './activitiesComponents/activities/activities.component';
 import { ProjectsComponent } from './projectsComponents/projects/projects.component';
+import { TaskComponent } from './taskCompnents/task/task.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'projects', title: 'Projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'contactos', title: 'Contactos', component: ContactosComponent, canActivate: [AuthGuard] },
   { path: 'activities/:id', title: 'Actividades', component: ActivitiesComponent, canActivate: [AuthGuard] },
+  { path: 'task/:id', title: 'Tareas', component: TaskComponent, canActivate: [AuthGuard] },
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'register', title: 'Registro', component: RegisterComponent },
   { path: 'userlisting', title: 'Usuarios', component: UserlistingComponent, canActivate: [AuthGuard] },

@@ -7,9 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { DialogActivitiesComponent } from '../dialog-activities/dialog-activities.component';
-import { ActivitiesDetalleComponent } from '../activities-detalles/activities-detalle.component';
+import { DialogActivitiesComponent } from '../../activitiesComponents/dialog-activities/dialog-activities.component';
+import { ActivitiesDetalleComponent } from '../../activitiesComponents/activities-detalles/activities-detalle.component';
 import { PermissionsService } from '../../services/permissions.service';
+import { DialogTaskComponent } from 'src/app/taskCompnents/dialog-task/dialog-task.component';
 
 @Component({
   selector: 'app-activities',
@@ -24,6 +25,7 @@ export class ActivitiesComponent implements OnInit {
   mostrarAdicionar = true;
   mostrarDelete = true;
   showEditButton = true;
+  showAddButton = true;
   displayedColumns: string[] = ['nombre', 'descripcion', 'fechaInicio', 'fechaFin', 'responsable', 'Acciones'];
   dataSource!: MatTableDataSource<any>;
   projectId: string; // Variable para almacenar el ID del proyecto
@@ -118,7 +120,7 @@ export class ActivitiesComponent implements OnInit {
   openDialog(): void {
     if (this.haveadd) {
       this.dialog.open(DialogActivitiesComponent, {
-        width: '50%'
+        data: { projectId: this.projectId, projectName: this.projectName } // Pasar projectId y projectName
       }).afterClosed().subscribe(val => {
         if (val === 'save') {
           Swal.fire({
@@ -137,6 +139,8 @@ export class ActivitiesComponent implements OnInit {
       this.toast.warning('No tienes permisos para agregar');
     }
   }
+
+
 
 
   editActivity(row: any) {
@@ -232,5 +236,32 @@ export class ActivitiesComponent implements OnInit {
   updateUIBasedOnPermissions() {
     this.showEditButton = this.haveedit;
     console.log('Add:', this.haveadd, 'Edit:', this.haveedit, 'Delete:', this.havedelete);
+  }
+
+
+  openDialogTask(activityId: number): void {
+    if (this.haveadd) {
+      const dialogRef = this.dialog.open(DialogTaskComponent, {
+        width: '50%',
+        data: { activityId } // Pasar el ID del anciano
+      }
+      );
+
+      dialogRef.afterClosed().subscribe(val => {
+        if (val === 'save') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Tarea agregada correctamente',
+            timer: 3000,
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false
+          });
+          this.getActivitiesByProject(this.projectId);
+        }
+      });
+    } else {
+      this.toast.warning('No tienes permisos de agregar tareas');
+    }
   }
 }

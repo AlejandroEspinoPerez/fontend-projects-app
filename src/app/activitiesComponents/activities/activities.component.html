@@ -5,7 +5,7 @@
       <mat-icon class="example-icon">assignment</mat-icon>
     <span>Actividades del proyecto {{ projectName }}</span> <!-- Muestra el nombre del proyecto -->
       <span class="example-spacer"></span>
-      <!-- <button *ngIf="mostrarAdicionar" mat-raised-button color="warn" (click)="openDialog()">Agregar Actividad</button> -->
+      <button *ngIf="mostrarAdicionar" mat-raised-button color="warn" (click)="openDialog()">Agregar Actividad</button>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -67,6 +67,17 @@
               <button (click)="deleteActivity(row.id)" *ngIf="mostrarDelete" mat-icon-button color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
+
+                <button (click)="openDetail(row)" mat-icon-button color="primary">
+                  <mat-icon>info</mat-icon>
+                </button>
+                <!-- <button mat-icon-button *ngIf="showAddButton" (click)="openDialogTask(row.id)" color="primary">
+                  <mat-icon>assignment_turned_in</mat-icon>
+                </button> -->
+
+                <button mat-icon-button [routerLink]="['/task', row.id]" color="primary">
+                  <mat-icon>assignment</mat-icon>
+                </button>
             </td>
           </ng-container>
 

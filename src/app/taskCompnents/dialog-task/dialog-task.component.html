@@ -1,0 +1,69 @@
+<div class="container1">
+  <h1 mat-dialog-title>{{ actionButton === 'SAVE' ? 'Adicionar Tarea a la Actividad ' + actividadNombre : 'Editar Tarea'
+    }}</h1>
+
+  <div mat-dialog-content>
+    <form [formGroup]="taskForm">
+      <!-- Nombre de la tarea -->
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Nombre de la Tarea</mat-label>
+        <input matInput type="text" formControlName="nombre" placeholder="Escribe el nombre de la tarea..">
+        <mat-error *ngIf="taskForm.get('nombre')?.invalid && taskForm.get('nombre')?.touched">
+          El nombre de la tarea es requerido.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Descripción -->
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion" placeholder="Escribe una descripción.."></textarea>
+        <mat-error *ngIf="taskForm.get('descripcion')?.invalid && taskForm.get('descripcion')?.touched">
+          La descripción es requerida.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Fecha de inicio -->
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Fecha de Inicio</mat-label>
+        <input matInput [matDatepicker]="inicioPicker" formControlName="fechaInicio"
+          placeholder="Elige la fecha de inicio..">
+        <mat-datepicker-toggle matSuffix [for]="inicioPicker"></mat-datepicker-toggle>
+        <mat-datepicker #inicioPicker></mat-datepicker>
+        <mat-error *ngIf="taskForm.get('fechaInicio')?.invalid && taskForm.get('fechaInicio')?.touched">
+          La fecha de inicio es requerida.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Fecha de fin -->
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Fecha de Fin</mat-label>
+        <input matInput [matDatepicker]="finPicker" formControlName="fechaFin" placeholder="Elige la fecha de fin..">
+        <mat-datepicker-toggle matSuffix [for]="finPicker"></mat-datepicker-toggle>
+        <mat-datepicker #finPicker></mat-datepicker>
+        <mat-error *ngIf="taskForm.get('fechaFin')?.invalid && taskForm.get('fechaFin')?.touched">
+          La fecha de fin es requerida.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Responsable -->
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Responsable</mat-label>
+      <mat-select formControlName="responsable">
+        <mat-option *ngFor="let usuario of usuariosResponsables" [value]="usuario.id"> <!-- Cambiar para usar el ID -->
+          {{ usuario.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="taskForm.get('responsable')?.invalid && taskForm.get('responsable')?.touched">
+        El responsable es requerido.
+      </mat-error>
+    </mat-form-field>
+    </form>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" mat-dialog-close>CLOSE</button>
+    <button mat-raised-button color="primary" (click)="addTask()">
+      {{ actionButton === 'SAVE' ? 'Guardar' : 'Actualizar' }}
+    </button>
+  </div>
+</div>

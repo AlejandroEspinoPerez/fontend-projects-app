@@ -19,16 +19,19 @@ import { UserlistingComponent } from './userlisting/userlisting.component';
 import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DialogAncianoComponent } from './ancianosComponents/dialog-anciano/dialog-anciano.component';
-import { DialogActivitiesComponent } from './enfermedadesComponents/dialog-activities/dialog-activities.component';
+import { DialogActivitiesComponent } from './activitiesComponents/dialog-activities/dialog-activities.component';
 import { DialogContactosComponent } from './contactosComponents/dialogContacto/dialog-contactos.component';
 import { ContactosComponent } from './contactosComponents/contactos/contactos.component';
-import { ActivitiesComponent } from './enfermedadesComponents/activities/activities.component';
+import { ActivitiesComponent } from './activitiesComponents/activities/activities.component';
 import { AncianoDetalleComponent } from './ancianosComponents/anciano-detalles/anciano-detalle.component';
-import { ActivitiesDetalleComponent } from './enfermedadesComponents/activities-detalles/activities-detalle.component';
+import { ActivitiesDetalleComponent } from './activitiesComponents/activities-detalles/activities-detalle.component';
 import { ContactosDetalleComponent } from './contactosComponents/contactos-detalles/contactos-detalle.component';
 import { ProjectsComponent } from './projectsComponents/projects/projects.component';
 import { DialogProjectsComponent } from './projectsComponents/dialog-projects/dialog-projects.component';
 import { ProjectsDetalleComponent } from './projectsComponents/projects-detalles/projects-detalle.component';
+import { TaskComponent } from './taskCompnents/task/task.component';
+import { TaskDetalleComponent } from './taskCompnents/task-detalles/task-detalle.component';
+import { DialogTaskComponent } from './taskCompnents/dialog-task/dialog-task.component';
 
 
 @NgModule({
@@ -53,7 +56,10 @@ import { ProjectsDetalleComponent } from './projectsComponents/projects-detalles
     ContactosDetalleComponent,
     ProjectsComponent,
     DialogProjectsComponent,
-    ProjectsDetalleComponent
+    ProjectsDetalleComponent,
+    TaskComponent,
+    TaskDetalleComponent,
+    DialogTaskComponent
 
 
 
