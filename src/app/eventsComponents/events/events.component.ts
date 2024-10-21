@@ -43,7 +43,7 @@ export class EventsComponent implements OnInit {
 
 
   // Función para generar reporte de proyectos
-  generateProjectReport(): void {
+  generateEventsReport(): void {
     // Navegar al componente de reportes pasando un parámetro
     this.router.navigate(['/reports'], { queryParams: { type: 'events' } });
   }

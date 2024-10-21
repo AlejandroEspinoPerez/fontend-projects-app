@@ -5,9 +5,14 @@
       <mat-icon class="example-icon">verified_user</mat-icon>
       <span>Proyectos</span>
       <span class="example-spacer"></span>
-      <button  class="ButtonReport" *ngIf="showAddButton" mat-raised-button color="warn" (click)="generateProjectReport()">Reporte</button>
-      <button *ngIf="showAddButton" mat-raised-button color="warn" (click)="openDialogProject()">Agregar
-        Proyecto</button>
+      <button class="ButtonReport" *ngIf="showAddButton" mat-raised-button color="warn" (click)="generateProjectReport()">
+        <mat-icon>description</mat-icon> Reporte
+      </button>
+      
+      <button class="ButtonAdd" *ngIf="showAddButton" mat-raised-button color="warn" (click)="openDialogProject()">
+        <mat-icon>add_circle</mat-icon> Agregar Proyecto
+      </button>
+
 
     </mat-toolbar-row>
   </mat-toolbar>

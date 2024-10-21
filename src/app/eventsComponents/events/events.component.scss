@@ -2,6 +2,41 @@ example-icon {
   padding: 0 14px;
 }
 
+
+.ButtonReport,
+.ButtonAdd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Espacio entre icono y texto */
+  font-weight: 500;
+}
+
+.logo {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.ButtonReport mat-icon {
+  font-size: 20px;
+}
+
+.ButtonAdd mat-icon {
+  font-size: 22px;
+}
+
+/* Opcional: Espaciado adicional */
+.ButtonReport {
+  margin-right: 10px;
+}
+
 .example-spacer {
   flex: 1 1 auto;
 }
@@ -22,6 +57,10 @@ table {
 .mat-mdc-table .mdc-data-table__header-row  {
   height: 30px;
   background: #7c4dff;
+}
+
+.ButtonReport {
+  margin-right: 10px;
 }
 
 .container
