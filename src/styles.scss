@@ -35,10 +35,16 @@
         font-weight: 600;
     }
 
-  
+
 }
 
 html{
-  height: 100vh;
+  height: 100%; // Asegura que el html y body ocupen todo el alto
+    margin: 0; // Elimina márgenes
+    padding: 0; // Elimina padding
+    overflow-x: hidden; // Evita el desplazamiento horizontal
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden; // Evita el desplazamiento horizontal
+  height: 100%; // Asegura que el html y body ocupen todo el alto
+ }

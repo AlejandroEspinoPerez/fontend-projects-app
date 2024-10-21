@@ -1,4 +1,14 @@
 
+.sidenav {
+  background: #4527a0;
+  transition: all .5s ease;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 5rem;
+  height: 100vh;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;}
+
 @media  (min-width: 600px) {
 
   .sidenav {

@@ -55,6 +55,12 @@ export class ProjectsComponent implements OnInit {
 
   }
 
+  // Función para generar reporte de proyectos
+  generateProjectReport(): void {
+    // Navegar al componente de reportes pasando un parámetro
+    this.router.navigate(['/reports'], { queryParams: { type: 'projects' } });
+  }
+
   // Obtener todos los proyectos
   getAllProjects() {
     this.api.getAllProjects().subscribe({

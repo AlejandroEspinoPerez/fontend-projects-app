@@ -1,0 +1,77 @@
+// Estilos generales del calendario
+
+.contenedorGrande{
+  height: 500px;
+}
+:host {
+  display: block;
+  margin: 200px; // Espaciado alrededor del componente
+  height: 100%;
+}
+
+.full-calendar-container {
+  max-width: 100%; // Evita que se salga del contenedor principal
+  overflow: hidden; // Oculta cualquier desbordamiento
+  height: auto; // Permite que el calendario ajuste su altura automáticamente
+}
+
+// Estilo del encabezado del calendario
+.fc-toolbar {
+  background-color: #3f51b5; // Color de fondo
+  color: white; // Color del texto
+  padding: 10px; // Espaciado interno
+  border-radius: 10px; // Bordes redondeados
+
+  .fc-button {
+    background-color: white; // Color de fondo de los botones
+    color: #3f51b5; // Color del texto de los botones
+    border: none; // Sin borde
+    border-radius: 5px; // Bordes redondeados
+    padding: 5px 10px; // Espaciado interno
+    margin: 0 5px; // Espaciado entre botones
+    cursor: pointer; // Cambia el cursor al pasar sobre el botón
+
+    &:hover {
+      background-color: #e0e0e0; // Color de fondo al pasar el mouse
+    }
+  }
+}
+
+// Estilo de los días del calendario
+.fc-daygrid-day {
+  background-color: #f5f5f5; // Color de fondo de los días
+  border: 1px solid #ddd; // Borde alrededor de los días
+  border-radius: 5px; // Bordes redondeados
+  transition: background-color 0.3s; // Efecto de transición
+
+  &:hover {
+    background-color: #e3f2fd; // Color de fondo al pasar el mouse
+  }
+
+  // Estilo para los eventos
+  .fc-event {
+    background-color: #3f51b5; // Color de fondo del evento
+    color: white; // Color del texto del evento
+    border-radius: 3px; // Bordes redondeados
+    padding: 2px 5px; // Espaciado interno
+  }
+}
+
+// Estilo para la vista de semana y día
+.fc-time-grid-event {
+  background-color: #4caf50; // Color de fondo para eventos de la vista de tiempo
+  color: white; // Color del texto
+  border-radius: 3px; // Bordes redondeados
+  padding: 4px; // Espaciado interno
+  white-space: nowrap; // Evita el salto de línea
+  text-overflow: ellipsis; // Agrega puntos suspensivos si el texto es demasiado largo
+  overflow: hidden; // Oculta el texto que no cabe
+}
+
+// Estilo para la vista de mes
+.fc-daygrid-event {
+  background-color: #f44336; // Color de fondo para eventos en vista mensual
+  color: white; // Color del texto
+  border-radius: 3px; // Bordes redondeados
+  padding: 2px; // Espaciado interno
+}

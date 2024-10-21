@@ -1,0 +1,30 @@
+<div class="container1">
+  <h1 mat-dialog-title>{{ actionButton === 'SAVE' ? 'Adicionar Evento' : 'Actualizar Evento' }}</h1>
+
+  <div mat-dialog-content>
+    <form [formGroup]="eventForm">
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Nombre del Evento</mat-label>
+        <input matInput type="text" formControlName="nombre" placeholder="Escribe el nombre del evento..">
+      </mat-form-field>
+
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Cantidad de Participantes</mat-label>
+        <input matInput type="number" formControlName="cantidadParticipantes"
+          placeholder="Escribe la cantidad de participantes..">
+      </mat-form-field>
+
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Fecha de Realización</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaRealizacion" placeholder="Selecciona la fecha..">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>CERRAR</button>
+    <button mat-raised-button color="primary" (click)="addEvent()">{{ actionButton }}</button>
+  </div>
+</div>

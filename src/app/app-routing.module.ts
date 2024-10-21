@@ -8,23 +8,26 @@ import { RegisterComponent } from "./register/register.component";
 
 import { UserlistingComponent } from "./userlisting/userlisting.component";
 import { AuthGuard } from './guard/auth.guard';
-import { AncianoComponent } from './ancianosComponents/anciano/anciano.component';
-import { ContactosComponent } from './contactosComponents/contactos/contactos.component';
 import { ActivitiesComponent } from './activitiesComponents/activities/activities.component';
 import { ProjectsComponent } from './projectsComponents/projects/projects.component';
 import { TaskComponent } from './taskCompnents/task/task.component';
+import { EventsComponent } from './eventsComponents/events/events.component';
+import { Calendar } from '@fullcalendar/core';
+import { CalendarComponent } from './calendar/calendar.component';
+import { ReportsComponent } from './reports/reports.component';
 
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', title: 'Dashboard', component: DashboardComponent },
-  { path: 'anciano', title: 'Anciano', component: AncianoComponent, canActivate: [AuthGuard] },
   { path: 'projects', title: 'Projects', component: ProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'contactos', title: 'Contactos', component: ContactosComponent, canActivate: [AuthGuard] },
+  { path: 'events', title: 'Eventos', component: EventsComponent, canActivate: [AuthGuard] },
   { path: 'activities/:id', title: 'Actividades', component: ActivitiesComponent, canActivate: [AuthGuard] },
   { path: 'task/:id', title: 'Tareas', component: TaskComponent, canActivate: [AuthGuard] },
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'register', title: 'Registro', component: RegisterComponent },
+  { path: 'calendar', title: 'Calendario', component: CalendarComponent },
+  { path: 'reports', title: 'Reportes', component: ReportsComponent },
   { path: 'userlisting', title: 'Usuarios', component: UserlistingComponent, canActivate: [AuthGuard] },
   { path: '404', title: 'Error', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent },

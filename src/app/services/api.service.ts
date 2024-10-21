@@ -21,9 +21,11 @@ export class ApiService {
   apiurlProjects = 'http://localhost:3000/projects/'
   apiurlActivities = 'http://localhost:3000/activities/'
   apiurlTask = 'http://localhost:3000/tasks/'
+  apiurlEvents = 'http://localhost:3000/events/'
   apiurlAncianos = 'http://localhost:8000/api/ancianos/';
   apiurlContactosEmergencia = 'http://localhost:8000/api/contactos/';
   apiurlEnfermedades = 'http://localhost:8000/api/enfermedades/';
+
 
   //  Métodos para manejar usuarios
     //Accesos a la user list ==============================
@@ -134,9 +136,7 @@ export class ApiService {
     return this.http.delete<any>(`${this.apiurlActivities}${id}/`);
   }
 
-  //=========================================== Activities
-  // Método para obtener actividades por ID de proyecto
-  // Método para obtener actividades por ID de proyecto
+  //=========================================== Tasks
   getTaskByActivityId(activitiesId: number): Observable<any> {
     return this.http.get<any>(`${this.apiurlTask}activity/${activitiesId}`);
   }
@@ -158,6 +158,22 @@ export class ApiService {
     return this.http.delete<any>(`${this.apiurlTask}${id}/`);
   }
 
+  //=========================================== Events
+  getAllEvents(): Observable<any> {
+    return this.http.get<any>(this.apiurlEvents);
+  }
+
+  postEvents(data: any) {
+    return this.http.post<any>(this.apiurlEvents, data);
+  }
+
+  putEvents(data: any, id: number) {
+    return this.http.put<any>(`${this.apiurlEvents}${id}/`, data);
+  }
+
+  deleteEvents(id: number) {
+    return this.http.delete<any>(`${this.apiurlEvents}${id}/`);
+  }
 
 
 

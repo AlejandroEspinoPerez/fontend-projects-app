@@ -1,0 +1,23 @@
+<!-- 
+<div class="reports-container">
+  <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar-row>
+      <mat-icon class="example-icon">assignment</mat-icon>
+      <span>Reportes</span> 
+      <span class="example-spacer"></span>
+      <button  mat-raised-button color="warn">Agregar Tarea</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div> -->
+
+<mat-toolbar color="primary">
+  <span>Reporte General</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="downloadReport()">
+    <mat-icon>download</mat-icon> <!-- Ícono de descarga -->
+  </button>
+</mat-toolbar>
+
+<div class="pdf-container">
+  <iframe id="pdf-iframe" width="100%" height="600px"></iframe>
+</div>

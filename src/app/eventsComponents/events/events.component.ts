@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../../services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,17 +6,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { DialogContactosComponent } from '../dialogContacto/dialog-contactos.component';
-import { Contactos } from '../../Models/contactos.model';
-import { ContactosDetalleComponent } from '../contactos-detalles/contactos-detalle.component';
 import { PermissionsService } from '../../services/permissions.service';
 import { Router } from '@angular/router';
+import { DialogEventsComponent } from '../dialogEvents/dialog-events.component';
+import { EventsDetalleComponent } from '../events-detalles/events-detalle.component';
+
 @Component({
-  selector: 'app-contactos',
-  templateUrl: './contactos.component.html',
-  styleUrls: ['./contactos.component.scss']
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.scss']
 })
-export class ContactosComponent {
+export class EventsComponent implements OnInit {
 
   haveedit = true;
   haveadd = true;
@@ -25,40 +25,45 @@ export class ContactosComponent {
   mostrarAdicionar = false;
   mostrarDelete = false;
   showEditButton = false;
-  displayedColumns: string[] = ['nombre_familiar', 'relacion', 'numero_telefono', 'genero', 'direccion', 'anciano_nombre', 'Acciones'];
+
+  // Asegúrate de que los nombres de las columnas coincidan con los datos de eventos
+  displayedColumns: string[] = ['nombre', 'fechaRealizacion', 'cantidadParticipantes', 'Acciones'];
 
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog, private router: Router, private permissionsService: PermissionsService, private toast: ToastrService, private api: ApiService) {
-    this.setAccesPermission();
-    if (this.api.getUserrole() == 'admin' || this.api.getUserrole() == 'trabajador') {
-      this.mostrarAdicionar = true;
-    }
-    if (this.api.getUserrole() == 'admin') {
-      this.mostrarDelete = true;
-    }
-    this.getAllContactos();
+  constructor(private dialog: MatDialog, private router: Router, private permissionsService: PermissionsService, private toast: ToastrService, private api: ApiService) { }
+
+  ngOnInit(): void {
+    //this.setAccesPermission();
+    this.getAllEvents();  // Obtén eventos después de agregar
+  }
+
+
+  // Función para generar reporte de proyectos
+  generateProjectReport(): void {
+    // Navegar al componente de reportes pasando un parámetro
+    this.router.navigate(['/reports'], { queryParams: { type: 'events' } });
   }
 
   openDialog(): void {
     if (this.haveadd) {
-      this.dialog.open(DialogContactosComponent, {
+      this.dialog.open(DialogEventsComponent, {
         width: '50%'
       }).afterClosed().subscribe(val => {
         if (val === 'save') {
           Swal.fire({
             icon: 'success',
-            title: 'Contacto agregado correctamente',
+            title: 'Evento agregado correctamente',
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true
           });
-          this.getAllContactos();
+          this.getAllEvents();  // Obtén eventos después de agregar
         }
       });
     } else {
@@ -66,10 +71,10 @@ export class ContactosComponent {
     }
   }
 
-  getAllContactos() {
-    this.api.getAllContactos().subscribe({
-      next: (res: Contactos[]) => {  // Asegúrate de que res sea de tipo Contactos[]
-        console.log(res); // Verifica si 'direccion' y 'genero' están presentes
+  getAllEvents() {
+    this.api.getAllEvents().subscribe({
+      next: (res: any[]) => {
+        console.log(res); // Verifica la respuesta
         this.dataSource = new MatTableDataSource(res);  // Cambia res.data a res
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -88,15 +93,14 @@ export class ContactosComponent {
     });
   }
 
-
-  editContacto(row: any) {
+  editEvent(row: any) {
     if (this.haveedit) {
-      this.dialog.open(DialogContactosComponent, { width: '50%', data: { ...row, ancianoId: row.anciano } }).afterClosed().subscribe(val => {
+      this.dialog.open(DialogEventsComponent, { width: '50%', data: { ...row } }).afterClosed().subscribe(val => {
         if (val === 'update') {
-          this.getAllContactos();
+          this.getAllEvents(); // Obtener eventos después de editar
           Swal.fire({
             icon: 'success',
-            title: 'Contacto actualizado correctamente',
+            title: 'Evento actualizado correctamente',
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -106,16 +110,15 @@ export class ContactosComponent {
         }
       });
     } else {
-      this.toast.warning('No tienes permiso de editar los contactos');
+      this.toast.warning('No tienes permiso de editar eventos');
     }
   }
 
-
-  deleteContacto(id: number) {
+  deleteEvent(id: number) {
     if (this.havedelete) {
       Swal.fire({
         title: '¿Está seguro?',
-        text: "¿Desea borrar este contacto?",
+        text: "¿Desea borrar este evento?",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -123,15 +126,15 @@ export class ContactosComponent {
         confirmButtonText: 'Sí, eliminar'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.api.deleteContacto(id).subscribe({
-            next: (res) => {
-              Swal.fire('¡Eliminado!', 'El contacto ha sido eliminado.', 'success');
-              this.getAllContactos();
+          this.api.deleteEvents(id).subscribe({
+            next: () => {
+              Swal.fire('¡Eliminado!', 'El evento ha sido eliminado.', 'success');
+              this.getAllEvents(); // Obtener eventos después de eliminar
             },
             error: () => {
               Swal.fire({
                 icon: 'error',
-                title: 'Error al eliminar el contacto',
+                title: 'Error al eliminar el evento',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
@@ -143,17 +146,16 @@ export class ContactosComponent {
         }
       });
     } else {
-      this.toast.warning('No tienes permisos para borrar contactos');
+      this.toast.warning('No tienes permisos para borrar eventos');
     }
   }
 
   openDetail(row: any): void {
-    this.dialog.open(ContactosDetalleComponent, {
+    this.dialog.open(EventsDetalleComponent, {
       width: '60%', // Puedes ajustar el ancho del modal a tu gusto
       data: row
     });
   }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -165,7 +167,7 @@ export class ContactosComponent {
 
   setAccesPermission() {
     const userRole = this.api.getUserrole();
-    const menu = 'residencia'; // Puedes cambiar el menú según el componente
+    const menu = 'eventos'; // Cambia el menú según el componente
 
     // Llamada al servicio para obtener los permisos
     this.permissionsService.getPermissions().subscribe({
@@ -178,10 +180,10 @@ export class ContactosComponent {
 
           // Actualiza los botones basados en los permisos
           this.updateUIBasedOnPermissions();
-          this.getAllContactos();  // Obtener ancianos solo si hay permisos
+          this.getAllEvents();  // Obtener eventos solo si hay permisos
         } else {
           this.toast.error('No tienes acceso a este menú');
-          this.router.navigate(['']); // Redireccionar si no hay acceso
+          this.router.navigate(['']); // Redireccionar
         }
       },
       error: (err) => {
@@ -190,10 +192,8 @@ export class ContactosComponent {
     });
   }
 
-
   updateUIBasedOnPermissions() {
     this.showEditButton = this.haveedit;
     console.log('Add:', this.haveadd, 'Edit:', this.haveedit, 'Delete:', this.havedelete);
-
   }
 }

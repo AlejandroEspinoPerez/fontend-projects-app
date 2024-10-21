@@ -3,9 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contactos-detalle',
-  templateUrl: './contactos-detalle.component.html',
-  styleUrls: ['./contactos-detalle.component.scss']
+  templateUrl: './calendar-events-detalle.component.html',
+  styleUrls: ['./calendar-events-detalle.component.scss']
 })
-export class ContactosDetalleComponent {
+export class CalendarEventsDetalleComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 }
