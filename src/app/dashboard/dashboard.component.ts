@@ -12,69 +12,42 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements OnInit {
 
-  // Data variables
-  dataAncianos: any;
-  dataContactos: any;
-  dataEnfermedades: any;
-
-  // Counts and totals
-  cantAncianos = 0;
-  cantContactos = 0;
-  cantEnfermedades = 0;
-  total = 30;  // Total base para calcular porcentajes
-
-  // Percentages
-  porCientoAncianos = 0;
-  porCientoContactos = 0;
-  porCientoEnfermedades = 0;
+  // Variables para datos
+  cantMiembros = 0;
+  cantProyectos = 0;
+  cantEventos = 0;
 
   logueado = !this.service.IsloggedIn();
 
   constructor(private service: ApiService) { }
 
   ngOnInit(): void {
-    // Fetch data for all categories in parallel
+    // Obtener datos en paralelo
     forkJoin({
-      ancianos: this.service.getAllAncianos(),
-      contactos: this.service.getAllContactos(),
-      enfermedades: this.service.getAllEnfermedades()
-    }).subscribe(({ ancianos, contactos, enfermedades }) => {
-      // Handle Ancianos data
-      if (ancianos) {
-        this.cantAncianos = ancianos.length;
-        this.porCientoAncianos = this.calculatePercentage(ancianos.length);
-      }
-      // Handle Contactos data
-      if (contactos) {
-        this.cantContactos = contactos.length;
-        this.porCientoContactos = this.calculatePercentage(contactos.length);
-      }
-      // Handle Enfermedades data
-      if (enfermedades) {
-        this.cantEnfermedades = enfermedades.length;
-        this.porCientoEnfermedades = this.calculatePercentage(enfermedades.length);
-      }
+      miembros: this.service.getAllUser(),
+      proyectos: this.service.getAllProjects(),
+      eventos: this.service.getAllEvents()
+    }).subscribe(({ miembros, proyectos, eventos }) => {
+      // Asignar cantidades obtenidas
+      this.cantMiembros = miembros.length;
+      this.cantProyectos = proyectos.length;
+      this.cantEventos = eventos.length;
 
-      // Now render the chart after data is loaded
+      // Renderizar gráfica con los nuevos datos
       this.renderChart();
     });
   }
 
-  // Method to calculate percentages
-  calculatePercentage(count: number): number {
-    return Math.floor((100 * count) / this.total);
-  }
-
-  // Render chart method
+  // Método para renderizar la gráfica
   renderChart(): void {
     new Chart('piechart', {
       type: 'bar',
       data: {
-        labels: ['Ancianos', 'Contactos', 'Enfermedades'],
+        labels: ['Miembros', 'Proyectos', 'Eventos'],
         datasets: [{
           label: 'Cantidad',
-          data: [this.cantAncianos, this.cantContactos, this.cantEnfermedades],
-          backgroundColor: ['red', 'blue', 'green'],
+          data: [this.cantMiembros, this.cantProyectos, this.cantEventos],
+          backgroundColor: ['#ff6384', '#36a2eb', '#4bc0c0'],
           borderWidth: 1
         }]
       },
