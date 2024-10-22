@@ -30,14 +30,14 @@ export class ProjectsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'nombre',
-    'descripcion',
+    //'descripcion',
     'tipo',
-    'localidad',
-    'objetivos',
+    // 'localidad',
+    // 'objetivos',
     'presupuesto',
-    'fechaInicio',
-    'fechaFin',
-    'resultado',
+    // 'fechaInicio',
+    // 'fechaFin',
+    // 'resultado',
     'lider',
     'miembros',
     'acciones'
