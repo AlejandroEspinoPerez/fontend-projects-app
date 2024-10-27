@@ -18,18 +18,15 @@ import { DialogTaskComponent } from 'src/app/taskCompnents/dialog-task/dialog-ta
   styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
-  haveedit = true;
-  haveadd = true;
-  havedelete = true;
+  haveedit = false;
+  haveadd = false;
+  havedelete = false;
   accesData: any;
-  mostrarAdicionar = true;
-  mostrarDelete = true;
-  showEditButton = true;
-  showAddButton = true;
   displayedColumns: string[] = ['nombre', 'descripcion', 'fechaInicio', 'fechaFin', 'responsable', 'Acciones'];
   dataSource!: MatTableDataSource<any>;
   projectId: string; // Variable para almacenar el ID del proyecto
   projectName: string = ''; // Inicialización
+  generateReport = false;
 
 
 
@@ -44,13 +41,6 @@ export class ActivitiesComponent implements OnInit {
     private permissionsService: PermissionsService,
     private route: ActivatedRoute // Inyectar ActivatedRoute
   ) {
-    //this.setAccesPermission();
-    if (this.api.getUserrole() === 'admin' || this.api.getUserrole() === 'trabajador') {
-      this.mostrarAdicionar = true;
-    }
-    if (this.api.getUserrole() === 'admin') {
-      this.mostrarDelete = true;
-    }
 
     // Obtener el ID del proyecto desde los parámetros de la ruta
     this.projectId = this.route.snapshot.params['id'];
@@ -58,10 +48,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getAllActivities();
+    this.setAccesPermission();
     if (this.projectId) {
       this.getProjectName(this.projectId);  // Obtener el nombre del proyecto
-      this.getActivitiesByProject(this.projectId);  // Obtener actividades del proyecto
     }
 
   }
@@ -208,36 +197,31 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  // setAccesPermission() {
-  //   const userRole = this.api.getUserrole();
-  //   const menu = 'actividades';
+  setAccesPermission() {
+    const userRole = this.api.getUserrole(); // Obtener rol del usuario
+    console.log(userRole);
 
-  //   this.permissionsService.getPermissions().subscribe({
-  //     next: (permissions) => {
-  //       const access = permissions.find(p => p.role === userRole && p.menu === menu);
-  //       if (access) {
-  //         this.haveadd = access.haveadd;
-  //         this.haveedit = access.haveedit;
-  //         this.havedelete = access.havedelete;
+    // Llamada al servicio para obtener los permisos por rol
+    this.permissionsService.getPermissionsByRole(userRole).subscribe({
+      next: (permissions) => {
+        if (permissions.projects) {
+          this.haveadd = permissions.activities.add;
+          this.haveedit = permissions.activities.edit;
+          this.havedelete = permissions.activities.delete;
+          this.generateReport = permissions.activities.generateReport;
 
-  //         this.updateUIBasedOnPermissions();
-  //         this.getAllActivities();
-  //       } else {
-  //         this.toast.error('No tienes acceso a este menú');
-  //         this.router.navigate(['']);
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('Error al obtener accesos:', err);
-  //     }
-  //   });
-  // }
-
-  updateUIBasedOnPermissions() {
-    this.showEditButton = this.haveedit;
-    console.log('Add:', this.haveadd, 'Edit:', this.haveedit, 'Delete:', this.havedelete);
+          // Actualiza la UI según los permisos obtenidos
+          this.getActivitiesByProject(this.projectId);  // Obtener actividades del proyecto
+        } else {
+          this.toast.error('No tienes acceso a este módulo');
+          this.router.navigate(['']); // Redireccionar si no hay acceso
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener permisos:', err);
+      }
+    });
   }
-
 
   openDialogTask(activityId: number): void {
     if (this.haveadd) {

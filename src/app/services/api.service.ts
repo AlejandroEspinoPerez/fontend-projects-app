@@ -22,6 +22,8 @@ export class ApiService {
   apiurlActivities = 'http://localhost:3000/activities/'
   apiurlTask = 'http://localhost:3000/tasks/'
   apiurlEvents = 'http://localhost:3000/events/'
+
+  
   apiurlAncianos = 'http://localhost:8000/api/ancianos/';
   apiurlContactosEmergencia = 'http://localhost:8000/api/contactos/';
   apiurlEnfermedades = 'http://localhost:8000/api/enfermedades/';

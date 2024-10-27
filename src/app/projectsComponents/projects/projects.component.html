@@ -5,11 +5,11 @@
       <mat-icon class="example-icon">verified_user</mat-icon>
       <span>Proyectos</span>
       <span class="example-spacer"></span>
-      <button class="ButtonReport" *ngIf="showAddButton" mat-raised-button color="warn" (click)="generateProjectReport()">
+      <button class="ButtonReport"  *ngIf="generateReport" mat-raised-button color="warn" (click)="generateProjectReport()">
         <mat-icon>description</mat-icon> Reporte
       </button>
       
-      <button class="ButtonAdd" *ngIf="showAddButton" mat-raised-button color="warn" (click)="openDialogProject()">
+      <button class="ButtonAdd"  *ngIf="haveadd"  mat-raised-button color="warn" (click)="openDialogProject()">
         <mat-icon>add_circle</mat-icon> Agregar Proyecto
       </button>
 
@@ -103,13 +103,13 @@
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
           <td mat-cell *matCellDef="let row">
-            <button (click)="editProject(row)" mat-icon-button color="primary">
+            <button (click)="editProject(row)" *ngIf="haveedit" mat-icon-button color="primary">
               <mat-icon>edit</mat-icon>
             </button>
-            <button (click)="deleteProject(row.id)" mat-icon-button color="warn">
+            <button (click)="deleteProject(row.id)" *ngIf="havedelete" mat-icon-button color="warn">
               <mat-icon>delete</mat-icon>
             </button>
-            <button (click)="openDetail(row)" mat-icon-button color="primary">
+            <button (click)="openDetail(row)" mat-icon-button  color="primary">
               <mat-icon>info</mat-icon>
             </button>
               <!-- <button mat-icon-button *ngIf="showAddButton" (click)="openDialogActivities(row.id)" color="primary">

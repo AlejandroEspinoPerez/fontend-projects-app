@@ -4,7 +4,7 @@
       <mat-icon class="example-icon">assignment</mat-icon>
       <span>Tareas de la actividad {{ activityName }}</span> <!-- Muestra el nombre de la actividad -->
       <span class="example-spacer"></span>
-        <button *ngIf="mostrarAdicionar" mat-raised-button color="warn" (click)="openDialog()"><mat-icon>add_circle</mat-icon> Agregar Tarea</button>
+        <button *ngIf="haveadd" mat-raised-button color="warn" (click)="openDialog()"><mat-icon>add_circle</mat-icon> Agregar Tarea</button>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -53,10 +53,10 @@
           <ng-container matColumnDef="Acciones">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let row">
-              <button (click)="editTask(row)" *ngIf="showEditButton" mat-icon-button color="primary">
+              <button (click)="editTask(row)" *ngIf="haveedit" mat-icon-button color="primary">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button (click)="deleteTask(row.id)" *ngIf="mostrarDelete" mat-icon-button color="warn">
+              <button (click)="deleteTask(row.id)" *ngIf="havedelete" mat-icon-button color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
               <button (click)="openDetail(row)" mat-icon-button color="primary">

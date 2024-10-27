@@ -2,44 +2,138 @@
 
 @include mat.core();
 
-$light-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: mat.define-palette(mat.$deep-purple-palette, 800),
-      accent: mat.define-palette(mat.$pink-palette, 300),
-      // warn:
-      warn: mat.define-palette(mat.$red-palette, A400),
+// Paletas de colores personalizadas para el tema claro
+$primary-light: mat.define-palette((50: #e3f2fd,
+      100: #bbdefb,
+      200: #90caf9,
+      300: #64b5f6,
+      400: #42a5f5,
+      500: #2196f3,
+      600: #1e88e5,
+      700: #1976d2,
+      800: #1565c0,
+      900: #0d47a1,
+      A100: #82b1ff,
+      A200: #448aff,
+      A400: #2979ff,
+      A700: #2962ff,
+      contrast: (500: #ffffff, )));
 
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
+$accent-light: mat.define-palette((50: #e1f5fe,
+      100: #b3e5fc,
+      200: #81d4fa,
+      300: #4fc3f7,
+      400: #29b6f6,
+      500: #03a9f4,
+      600: #039be5,
+      700: #0288d1,
+      800: #0277bd,
+      900: #01579b,
+      A100: #80d8ff,
+      A200: #40c4ff,
+      A400: #00b0ff,
+      A700: #0091ea,
+      contrast: (500: #ffffff, )));
 
-$dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: mat.define-palette(mat.$deep-purple-palette, A200),
-      accent: mat.define-palette( mat.$teal-palette, 500),
-      // warn:
-      warn: mat.define-palette(mat.$red-palette, 600),
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
+// Paleta roja para advertencias
+$warn-light: mat.define-palette((50: #ffebee, // Rojo muy claro
+      100: #ffcdd2, // Rojo claro
+      200: #ef9a9a, // Rojo intermedio
+      300: #e57373, // Rojo vibrante
+      400: #ef5350, // Rojo saturado
+      500: #a71d12, // Rojo principal
+      600: #e53935, // Rojo más oscuro
+      700: #d32f2f, // Rojo profundo
+      800: #c62828, // Rojo más profundo
+      900: #a71d12, // Rojo muy oscuro
+      A100: #ff8a80, // Rojo acentuado claro
+      A200: #ff5252, // Rojo acentuado vibrante
+      A400: #ff1744, // Rojo muy vibrante
+      A700: #d50000, // Rojo vibrante y profundo
+      contrast: (900: #ffffff, ) // Contraste de texto en fondo rojo
+    ));
 
+// Tema claro basado en tonalidades de azul
+$light-theme: mat.define-light-theme((color: (primary: $primary-light,
+        accent: $accent-light,
+        warn: $warn-light,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0,
+    ));
+
+// Paletas de colores personalizadas para el tema oscuro
+$primary-dark: mat.define-palette((50: #e0f7fa,
+      100: #b2ebf2,
+      200: #80deea,
+      300: #4dd0e1,
+      400: #26c6da,
+      500: #1a76c0,
+      600: #00acc1,
+      700: #0097a7,
+      800: #00838f,
+      900: #006064,
+      A100: #84ffff,
+      A200: #18ffff,
+      A400: #00e5ff,
+      A700: #00b8d4,
+      contrast: (500: #ffffff, )));
+
+$accent-dark: mat.define-palette((50: #e3f2fd,
+      100: #bbdefb,
+      200: #90caf9,
+      300: #64b5f6,
+      400: #42a5f5,
+      500: #2196f3,
+      600: #1e88e5,
+      700: #1976d2,
+      800: #1565c0,
+      900: #0d47a1,
+      A100: #82b1ff,
+      A200: #448aff,
+      A400: #2979ff,
+      A700: #2962ff,
+      contrast: (500: #ffffff, )));
+
+// Paleta roja para advertencias en tema oscuro
+$warn-dark: mat.define-palette((50: #ffebee,
+      100: #ffcdd2,
+      200: #ef9a9a,
+      300: #e57373,
+      400: #ef5350,
+      500: #a92117,
+      600: #e53935,
+      700: #d32f2f,
+      800: #c62828,
+      900: #b71c1c,
+      A100: #ff8a80,
+      A200: #ff5252,
+      A400: #ff1744,
+      A700: #d50000,
+      contrast: (500: #ffffff, )));
+
+// Tema oscuro basado en tonalidades de azul
+$dark-theme: mat.define-dark-theme((color: (primary: $primary-dark,
+        accent: $accent-dark,
+        warn: $warn-dark,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0,
+    ));
+
+// Aplica el tema claro por defecto
 @include mat.all-component-themes($light-theme);
 
+// Clase para el modo oscuro
 .dark-mode {
-  
   @include mat.all-component-colors($dark-theme);
-  background-color: #151d2a;
-  color: #fff;
+  background-color: #0d47a1;
+  color: #cbe2f1;
 }
 
+// Clase para el modo claro
 .light-mode {
   @include mat.all-component-colors($light-theme);
-  background-color:#fff ;
-  color:  #151d2a;
+  background-color: #e3f2fd77;
+  color: #0d47a1;
 }

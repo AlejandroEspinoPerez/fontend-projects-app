@@ -17,13 +17,10 @@ import { PermissionsService } from '../../services/permissions.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
-  haveedit = true;
-  haveadd = true;
-  havedelete = true;
+  haveedit = false;
+  haveadd = false;
+  havedelete = false;
   accesData: any;
-  mostrarAdicionar = true;
-  mostrarDelete = true;
-  showEditButton = true;
   displayedColumns: string[] = ['nombre', 'descripcion', 'fechaInicio', 'fechaFin', 'responsable', 'Acciones'];
   dataSource!: MatTableDataSource<any>;
   activityId: string; // Cambiado a activityId
@@ -40,18 +37,12 @@ export class TaskComponent implements OnInit {
     private permissionsService: PermissionsService,
     private route: ActivatedRoute
   ) {
-    if (this.api.getUserrole() === 'admin' || this.api.getUserrole() === 'trabajador') {
-      this.mostrarAdicionar = true;
-    }
-    if (this.api.getUserrole() === 'admin') {
-      this.mostrarDelete = true;
-    }
-
     // Obtener el ID de la actividad desde los parámetros de la ruta
     this.activityId = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
+    this.setAccesPermission();
     if (this.activityId) {
       this.getActivityName(this.activityId);  // Obtener el nombre de la actividad
       this.getTasksByActivity(this.activityId);  // Obtener tareas de la actividad
@@ -181,6 +172,30 @@ export class TaskComponent implements OnInit {
     this.dialog.open(TaskDetalleComponent, {
       width: '60%',
       data: row
+    });
+  }
+
+  setAccesPermission() {
+    const userRole = this.api.getUserrole(); // Obtener rol del usuario
+    console.log(userRole);
+
+    // Llamada al servicio para obtener los permisos por rol
+    this.permissionsService.getPermissionsByRole(userRole).subscribe({
+      next: (permissions) => {
+        if (permissions.projects) {
+          this.haveadd = permissions.tasks.add;
+          this.haveedit = permissions.tasks.edit;
+          this.havedelete = permissions.tasks.delete;
+          // Actualiza la UI según los permisos obtenidos
+          this.getTasksByActivity(this.activityId);  // Obtener actividades del proyecto
+        } else {
+          this.toast.error('No tienes acceso a este módulo');
+          this.router.navigate(['']); // Redireccionar si no hay acceso
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener permisos:', err);
+      }
     });
   }
 }

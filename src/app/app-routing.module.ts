@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'register', title: 'Registro', component: RegisterComponent },
   { path: 'calendar', title: 'Calendario', component: CalendarComponent },
-  { path: 'reports', title: 'Reportes', component: ReportsComponent },
+  { path: 'reports', title: 'Reportes', component: ReportsComponent, canActivate: [AuthGuard] },
   { path: 'userlisting', title: 'Usuarios', component: UserlistingComponent, canActivate: [AuthGuard] },
   { path: '404', title: 'Error', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent },

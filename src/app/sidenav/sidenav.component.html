@@ -20,8 +20,8 @@
     </li>
 
     <!-- Icono de Proyectos -->
-    <li class="sidenav-nav-item">
-      <a class="sidenav-nav-link" routerLink="projects" routerLinkActive="active"
+    <li class="sidenav-nav-item" *ngIf="projects">
+      <a class="sidenav-nav-link" routerLink="projects"  routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
         <i class="sidenav-link-icon icon-sidenav fas fa-project-diagram"></i>
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Proyectos</span>
@@ -29,8 +29,8 @@
     </li>
 
     <!-- Icono de Eventos -->
-    <li class="sidenav-nav-item">
-      <a class="sidenav-nav-link" routerLink="events" routerLinkActive="active"
+    <li class="sidenav-nav-item" *ngIf="events">
+      <a class="sidenav-nav-link" routerLink="events"  routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
         <i class="sidenav-link-icon icon-sidenav fas fa-calendar-alt"></i>
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Eventos</span>
@@ -38,16 +38,16 @@
     </li>
 
     <!-- Icono de Calendario -->
-    <li class="sidenav-nav-item">
-      <a class="sidenav-nav-link" routerLink="calendar" routerLinkActive="active"
+    <li class="sidenav-nav-item" *ngIf="calendar">
+      <a class="sidenav-nav-link" routerLink="calendar"  routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
         <i class="sidenav-link-icon icon-sidenav fas fa-calendar"></i>
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Calendario</span>
       </a>
     </li>
 
-    <li class="sidenav-nav-item">
-      <a class="sidenav-nav-link" routerLink="/reports" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <li class="sidenav-nav-item" *ngIf="reports">
+      <a class="sidenav-nav-link" routerLink="/reports"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <i class="sidenav-link-icon fas fa-file-pdf"></i>
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Reportes</span>
       </a>

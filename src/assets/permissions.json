@@ -1,26 +1,162 @@
-[
-  {
-    "id": 1,
-    "haveedit": true,
-    "haveadd": true,
-    "havedelete": true,
-    "role": "admin",
-    "menu": "residencia"
+{
+  "JefeDirectivo": {
+    "projects": {
+      "view": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "generateReport": true,
+      "viewActivities": true
+    },
+    "activities": {
+      "viewDetails": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "viewTasks": true
+    },
+    "tasks": {
+      "viewDetails": true,
+      "add": false,
+      "edit": false,
+      "delete": false
+    },
+    "events": {
+      "view": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "generateReport": true
+    },
+    "calendar": {
+      "view": true
+    },
+    "reports": {
+      "view": true
+    },
+    "users": {
+      "view": false
+    }
   },
-  {
-    "id": 3,
-    "haveedit": false,
-    "haveadd": false,
-    "havedelete": false,
-    "role": "usuario",
-    "menu": "residencia"
+  "admin": {
+    "projects": {
+      "view": true,
+      "add": true,
+      "edit": true,
+      "delete": true,
+      "generateReport": true,
+      "viewActivities": true
+    },
+    "activities": {
+      "viewDetails": true,
+      "add": true,
+      "edit": true,
+      "delete": true,
+      "viewTasks": true
+    },
+    "tasks": {
+      "viewDetails": true,
+      "add": true,
+      "edit": true,
+      "delete": true
+    },
+    "events": {
+      "view": true,
+      "add": true,
+      "edit": true,
+      "delete": true,
+      "generateReport": true
+    },
+    "calendar": {
+      "view": true
+    },
+    "reports": {
+      "view": true
+    },
+    "users": {
+      "view": true,
+      "add": true,
+      "edit": true,
+      "delete": true
+    }
   },
-  {
-    "id": 4,
-    "haveedit": true,
-    "haveadd": true,
-    "havedelete": false,
-    "role": "trabajador",
-    "menu": "residencia"
+  "Lider": {
+    "projects": {
+      "view": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "generateReport": false,
+      "viewActivities": true
+    },
+    "activities": {
+      "view": true,
+      "add": true,
+      "edit": true,
+      "delete": true,
+      "viewTasks": true
+    },
+    "tasks": {
+      "view": true,
+      "add": true,
+      "edit": true,
+      "delete": true
+    },
+    "events": {
+      "view": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "generateReport": false
+    },
+    "calendar": {
+      "view": true
+    },
+    "users": {
+      "view": false
+    },
+    "reports": {
+      "view": false
+    }
+  },
+  "Miembro": {
+    "projects": {
+
+      "view": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "generateReport": false,
+      "viewActivities": false
+    },
+    "activities": {
+      "view": true,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "viewTasks": false
+    },
+    "tasks": {
+      "viewDetails": true,
+      "add": false,
+      "edit": false,
+      "delete": false
+    },
+    "events": {
+      "view": false,
+      "add": false,
+      "edit": false,
+      "delete": false,
+      "generateReport": false
+    },
+    "calendar": {
+      "view": true
+    },
+    "users": {
+      "view": false
+    },
+    "reports": {
+      "view": false
+    }
   }
-]
+}

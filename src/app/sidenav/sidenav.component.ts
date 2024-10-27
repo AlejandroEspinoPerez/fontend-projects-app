@@ -17,6 +17,7 @@ import { navbarData } from './nav-data';
 import { ApiService } from '../services/api.service';
 import { DOCUMENT } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { PermissionsService } from '../services/permissions.service';
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
@@ -53,9 +54,15 @@ interface SideNavToggle {
 export class SidenavComponent implements OnInit {
   isdarkThemeActive = false;
   isAdmin = false;
+  events = false;
+  reports = false;
+  calendar = false;
+  projects = true;
+
 
   constructor(
     private service: ApiService,
+    private permissionsService: PermissionsService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
@@ -82,11 +89,41 @@ export class SidenavComponent implements OnInit {
 
       if (this.service.getUserrole() == 'admin') {
         this.isAdmin = true;
-      }
-
-
-
+    }
+    this.setAccessPermission(); 
   }
+
+
+  setAccessPermission() {
+    const userRole = this.service.getUserrole(); // Obtener rol del usuario
+    console.log('Rol del usuario:', userRole);
+
+    // Llamada al servicio para obtener los permisos por rol
+    this.permissionsService.getPermissionsByRole(userRole).subscribe({
+      next: (permissions) => {
+        console.log('Permisos recibidos:', permissions);
+        // Acceder a los permisos en función del rol
+        if (permissions) {
+          this.calendar = permissions.calendar?.view || false;
+          this.events = permissions.events?.view || false;
+          this.projects = permissions.projects?.view || false;
+          this.reports = permissions.reports?.view || false;
+
+          console.log('Permisos establecidos:');
+          console.log('Calendar:', this.calendar);
+          console.log('Events:', this.events);
+          console.log('Projects:', this.projects);
+          console.log('Reports:', this.reports);
+        } else {
+          console.warn('No se encontraron permisos para el rol:', userRole);
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener permisos:', err);
+      }
+    });
+  }
+
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;

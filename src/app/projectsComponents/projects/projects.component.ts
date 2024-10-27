@@ -10,6 +10,7 @@ import { DialogProjectsComponent } from '../dialog-projects/dialog-projects.comp
 import { ProjectsDetalleComponent } from '../projects-detalles/projects-detalle.component';
 import { ApiService } from '../../services/api.service';
 import { DialogActivitiesComponent } from 'src/app/activitiesComponents/dialog-activities/dialog-activities.component';
+import { PermissionsService } from 'src/app/services/permissions.service';
 
 @Component({
   selector: 'app-projects',
@@ -19,14 +20,16 @@ import { DialogActivitiesComponent } from 'src/app/activitiesComponents/dialog-a
 export class ProjectsComponent implements OnInit {
 
   // Permisos (temporalmente obviados)
-  haveedit = true;
-  haveadd = true;
-  havedelete = true;
+  haveedit = false;
+  haveadd = false;
+  havedelete = false;
 
   // Botones visibles
-  showAddButton = true;
-  showEditButton = true;
-  showDeleteButton = true;
+  showAddButton = false;
+  showEditButton = false;
+  showDeleteButton = false;
+
+  generateReport = false;
 
   displayedColumns: string[] = [
     'nombre',
@@ -48,10 +51,10 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog, private router: Router, private toast: ToastrService, private api: ApiService) { }
+  constructor(private dialog: MatDialog, private permissionsService: PermissionsService,private router: Router, private toast: ToastrService, private api: ApiService) { }
 
   ngOnInit(): void {
-    this.getAllProjects();
+    this.setAccesPermission();
 
   }
 
@@ -196,5 +199,38 @@ export class ProjectsComponent implements OnInit {
     } else {
       this.toast.warning('No tienes permisos de agregar actividades');
     }
+  }
+
+
+  setAccesPermission() {
+    const userRole = this.api.getUserrole(); // Obtener rol del usuario
+    console.log(userRole);
+
+    // Llamada al servicio para obtener los permisos por rol
+    this.permissionsService.getPermissionsByRole(userRole).subscribe({
+      next: (permissions) => {
+        if (permissions.projects) {
+          this.haveadd = permissions.projects.add;
+          this.haveedit = permissions.projects.edit;
+          this.havedelete = permissions.projects.delete;
+          this.generateReport = permissions.projects.generateReport;
+
+          // Actualiza la UI según los permisos obtenidos
+          this.updateUIBasedOnPermissions();
+          this.getAllProjects();  // Obtener eventos si hay permisos
+        } else {
+          this.toast.error('No tienes acceso a este módulo');
+          this.router.navigate(['']); // Redireccionar si no hay acceso
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener permisos:', err);
+      }
+    });
+  }
+
+  updateUIBasedOnPermissions() {
+    this.showEditButton = this.haveedit;
+    console.log('Add:', this.haveadd, 'Edit:', this.haveedit, 'Delete:', this.havedelete);
   }
 }

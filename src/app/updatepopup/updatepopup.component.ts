@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./updatepopup.component.css']
 })
 export class UpdatepopupComponent implements OnInit {
-  rolelist: string[] = ['jefe', 'líder', 'miembro']; // Lista de roles fijos
+  rolelist: string[] = ['JefeDirectivo', 'Lider', 'Miembro','admin']; // Lista de roles fijos
   editdata: any; // Datos del usuario a editar
   registerform: FormGroup; // Formulario reactivo
 

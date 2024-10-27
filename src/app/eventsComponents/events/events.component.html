@@ -4,11 +4,11 @@
       <mat-icon class="example-icon">event</mat-icon>
       <span>Eventos</span>
       <span class="example-spacer"></span>
-    <button class="ButtonReport" mat-raised-button color="warn" (click)="generateEventsReport()">
+    <button class="ButtonReport" mat-raised-button color="warn" *ngIf="generateReport" (click)="generateEventsReport()">
       <mat-icon>description</mat-icon> Reporte
     </button>
     
-    <button class="ButtonAdd"  mat-raised-button color="warn" (click)="openDialog()">
+    <button class="ButtonAdd"  mat-raised-button color="warn" *ngIf="haveadd" (click)="openDialog()">
       <mat-icon>add_circle</mat-icon> Agregar Evento
     </button>
     </mat-toolbar-row>

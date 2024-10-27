@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';  // Importar SweetAlert2
 @Component({
   selector: 'app-userlisting',
   templateUrl: './userlisting.component.html',
-  styleUrls: ['./userlisting.component.css']
+  styleUrls: ['./userlisting.component.scss']
 })
 export class UserlistingComponent {
   userlist: any;

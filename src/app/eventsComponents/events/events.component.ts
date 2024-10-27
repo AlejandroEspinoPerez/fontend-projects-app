@@ -18,13 +18,14 @@ import { EventsDetalleComponent } from '../events-detalles/events-detalle.compon
 })
 export class EventsComponent implements OnInit {
 
-  haveedit = true;
-  haveadd = true;
-  havedelete = true;
+  haveedit = false;
+  haveadd = false;
+  havedelete = false;
   accesData: any;
   mostrarAdicionar = false;
   mostrarDelete = false;
   showEditButton = false;
+  generateReport = false;
 
   // Asegúrate de que los nombres de las columnas coincidan con los datos de eventos
   displayedColumns: string[] = ['nombre', 'fechaRealizacion', 'cantidadParticipantes', 'Acciones'];
@@ -37,8 +38,7 @@ export class EventsComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router, private permissionsService: PermissionsService, private toast: ToastrService, private api: ApiService) { }
 
   ngOnInit(): void {
-    //this.setAccesPermission();
-    this.getAllEvents();  // Obtén eventos después de agregar
+    this.setAccesPermission();
   }
 
 
@@ -166,28 +166,29 @@ export class EventsComponent implements OnInit {
   }
 
   setAccesPermission() {
-    const userRole = this.api.getUserrole();
-    const menu = 'eventos'; // Cambia el menú según el componente
+    const userRole = this.api.getUserrole(); // Obtener rol del usuario
+    console.log(userRole);
 
-    // Llamada al servicio para obtener los permisos
-    this.permissionsService.getPermissions().subscribe({
+    // Llamada al servicio para obtener los permisos por rol
+    this.permissionsService.getPermissionsByRole(userRole).subscribe({
       next: (permissions) => {
-        const access = permissions.find(p => p.role === userRole && p.menu === menu);
-        if (access) {
-          this.haveadd = access.haveadd;
-          this.haveedit = access.haveedit;
-          this.havedelete = access.havedelete;
+        console.log(permissions.events); // Verificar si existen los permisos de eventos
+        if (permissions.events) {
+          this.haveadd = permissions.events.add;
+          this.haveedit = permissions.events.edit;
+          this.havedelete = permissions.events.delete;
+          this.generateReport = permissions.events.generateReport;
 
-          // Actualiza los botones basados en los permisos
+          // Actualiza la UI según los permisos obtenidos
           this.updateUIBasedOnPermissions();
-          this.getAllEvents();  // Obtener eventos solo si hay permisos
+          this.getAllEvents();  // Obtener eventos si hay permisos
         } else {
-          this.toast.error('No tienes acceso a este menú');
-          this.router.navigate(['']); // Redireccionar
+          this.toast.error('No tienes acceso a este módulo');
+          this.router.navigate(['']); // Redireccionar si no hay acceso
         }
       },
       error: (err) => {
-        console.error('Error al obtener accesos:', err);
+        console.error('Error al obtener permisos:', err);
       }
     });
   }
