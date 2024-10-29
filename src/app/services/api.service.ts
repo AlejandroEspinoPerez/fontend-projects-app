@@ -144,8 +144,8 @@ export class ApiService {
     return this.http.post<any>(this.apiurlActivities, data);
   }
 
-  putActivities(data: any, id: number) {
-    return this.http.put<any>(`${this.apiurlActivities}${id}/`, data);
+  putActivities(actividadId: number, actividadData: any) {
+    return this.http.put<any>(`${this.apiurlActivities}${actividadId}/`, actividadData);
   }
 
   deleteActivities(id: number) {

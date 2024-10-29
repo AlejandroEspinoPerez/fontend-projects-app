@@ -13,8 +13,8 @@ export class DialogProjectsComponent implements OnInit {
 
   projectForm!: FormGroup;
   actionButton: string = "SAVE";
-  usuarios: any[] = []; // Para almacenar los usuarios disponibles
-  miembrosSeleccionados: any[] = []; // Para almacenar los miembros seleccionados
+  usuarios: any[] = [];
+  miembrosSeleccionados: any[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private api: ApiService,
@@ -28,21 +28,18 @@ export class DialogProjectsComponent implements OnInit {
       descripcion: ['', Validators.required],
       tipo: ['', Validators.required],
       localidad: ['', Validators.required],
-      lider: ['', Validators.required], // Selección del líder
-      miembros: ['', Validators.required], // Selección múltiple de miembros
+      lider: ['', Validators.required],
+      miembros: ['', Validators.required],
       objetivos: ['', Validators.required],
       presupuesto: ['', [Validators.required, Validators.min(0)]],
       fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
       resultado: ['', Validators.required]
     });
 
-    // Llamadas para obtener los usuarios (líderes y miembros)
-    this.getLideres();
-    this.getMiembros();
-
+    // Si estamos en modo edición, agregamos el campo fechaFin como opcional
     if (this.editData) {
       this.actionButton = "UPDATE";
+      this.projectForm.addControl('fechaFin', this.formBuilder.control('')); // Fecha de Fin opcional
       this.projectForm.patchValue({
         nombre: this.editData.nombre,
         descripcion: this.editData.descripcion,
@@ -53,17 +50,24 @@ export class DialogProjectsComponent implements OnInit {
         objetivos: this.editData.objetivos,
         presupuesto: this.editData.presupuesto,
         fechaInicio: this.editData.fechaInicio,
-        fechaFin: this.editData.fechaFin,
+        fechaFin: this.editData.fechaFin, // Solo en modo de edición
         resultado: this.editData.resultado,
       });
+    } else {
+      this.actionButton = "SAVE";
     }
+
+    // Cargar líderes y miembros
+    this.getLideres();
+    this.getMiembros();
   }
+
 
   // Método para obtener la lista de líderes
   getLideres() {
     this.api.getLideres().subscribe({
       next: (res) => {
-        this.usuarios = res; // Guardar líderes
+        this.usuarios = res;
       },
       error: () => {
         Swal.fire({
@@ -81,7 +85,7 @@ export class DialogProjectsComponent implements OnInit {
   getMiembros() {
     this.api.getMembers().subscribe({
       next: (res) => {
-        this.miembrosSeleccionados = res; // Guardar miembros
+        this.miembrosSeleccionados = res;
       },
       error: () => {
         Swal.fire({
@@ -94,8 +98,9 @@ export class DialogProjectsComponent implements OnInit {
       }
     });
   }
+
   addProject() {
-    if (!this.editData) {
+    if (!this.editData) { // Modo creación
       if (this.projectForm.valid) {
         this.api.postProjects(this.projectForm.value).subscribe({
           next: (res) => {

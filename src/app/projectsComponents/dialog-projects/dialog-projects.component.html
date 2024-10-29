@@ -72,13 +72,16 @@
       <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
     
-    <!-- Fecha de fin -->
+  <!-- Fecha de fin (solo se muestra en edición) -->
+  <ng-container *ngIf="editData">
     <mat-form-field class="input" appearance="outline">
       <mat-label>Fecha de Fin</mat-label>
-      <input matInput [matDatepicker]="endPicker" formControlName="fechaFin" placeholder="Elige la fecha..">
+      <input matInput [matDatepicker]="endPicker" formControlName="fechaFin" placeholder="Elige la fecha (opcional)">
       <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
       <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
+  </ng-container>
+
 
 
       <!-- Resultado -->
