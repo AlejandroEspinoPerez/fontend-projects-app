@@ -64,28 +64,22 @@
         <input matInput type="number" formControlName="presupuesto" placeholder="Escribe el presupuesto..">
       </mat-form-field>
 
-      <!-- Fecha de inicio -->
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>Fecha de Inicio</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaInicio" placeholder="Elige la fecha..">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+    <!-- Fecha de inicio -->
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Fecha de Inicio</mat-label>
+      <input matInput [matDatepicker]="startPicker" formControlName="fechaInicio" placeholder="Elige la fecha..">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+    
+    <!-- Fecha de fin -->
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Fecha de Fin</mat-label>
+      <input matInput [matDatepicker]="endPicker" formControlName="fechaFin" placeholder="Elige la fecha..">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
 
-        <!-- <mat-form-field class="input" appearance="outline">
-          <mat-label>Fecha de Diagnóstico</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha_diagnostico" placeholder="Elige la fecha..">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field> -->
-
-      <!-- Fecha de fin -->
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>Fecha de Fin</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fechaFin" placeholder="Elige la fecha..">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
 
       <!-- Resultado -->
       <mat-form-field class="input" appearance="outline">
