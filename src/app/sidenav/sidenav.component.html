@@ -11,7 +11,7 @@
   <ul class="sidenav-nav">
 
     <!-- Icono del dashboard -->
-    <li class="sidenav-nav-item">
+    <li class="sidenav-nav-item" *ngIf="dashboard">
       <a class="sidenav-nav-link" routerLink="dashboard" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
         <i class="sidenav-link-icon icon-sidenav fas fa-tachometer-alt"></i>

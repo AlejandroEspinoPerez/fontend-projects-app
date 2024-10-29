@@ -1,15 +1,27 @@
 <div class="contenedorGrande">
   <div class="container">
     <h1 class="h1centrado">Dashboard</h1>
-    <div *ngIf="logueado" class="card">
+    <div *ngIf="!logueado" class="card">
       <div class="card-head" style="color: black;">Autenticación Necesaria</div>
       <div class="card-body">
         <p style="color: black;">AUTENTÍQUESE EN EL SISTEMA PARA MÁS INFORMACIÓN Y GESTIÓN</p>
       </div>
     </div>
+
+
+    <div *ngIf="logueado && !tienePermiso" class="card">
+      <div class="card-head" style="color: black;">Acceso Denegado</div>
+      <div class="card-body">
+        <p style="color: black;">No tiene permiso para acceder al Dashboard.</p>
+      </div>
+    </div>
+
+
+
   </div>
 
-  <div *ngIf="!logueado" class="col-md-12 container contenedorCard">
+
+  <div *ngIf="logueado && tienePermiso" class="col-md-12 container contenedorCard">
     <div class="row">
       <!-- Card para Miembros -->
       <div class="col-xl-3 col-lg-6">

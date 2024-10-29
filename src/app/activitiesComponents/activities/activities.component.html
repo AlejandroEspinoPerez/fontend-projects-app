@@ -75,7 +75,7 @@
                   <mat-icon>assignment_turned_in</mat-icon>
                 </button> -->
 
-                <button mat-icon-button [routerLink]="['/task', row.id]" color="primary">
+                <button mat-icon-button  *ngIf="havetask" [routerLink]="['/task', row.id]" color="primary">
                   <mat-icon>assignment</mat-icon>
                 </button>
             </td>

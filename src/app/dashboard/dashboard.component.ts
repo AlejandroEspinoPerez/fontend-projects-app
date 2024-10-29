@@ -17,25 +17,45 @@ export class DashboardComponent implements OnInit {
   cantProyectos = 0;
   cantEventos = 0;
 
-  logueado = !this.service.IsloggedIn();
+  logueado = false; // Cambia esto a false inicialmente
+  tienePermiso = false; // Variable para verificar permisos
 
   constructor(private service: ApiService) { }
 
   ngOnInit(): void {
-    // Obtener datos en paralelo
-    forkJoin({
-      miembros: this.service.getAllUser(),
-      proyectos: this.service.getAllProjects(),
-      eventos: this.service.getAllEvents()
-    }).subscribe(({ miembros, proyectos, eventos }) => {
-      // Asignar cantidades obtenidas
-      this.cantMiembros = miembros.length;
-      this.cantProyectos = proyectos.length;
-      this.cantEventos = eventos.length;
 
-      // Renderizar gráfica con los nuevos datos
-      this.renderChart();
-    });
+    // Verificar si el usuario está autenticado
+    this.logueado = this.service.IsloggedIn();
+    // Verificar si el usuario tiene permiso para acceder al Dashboard
+    this.verificarPermiso();
+
+
+    // Solo obtener datos si tiene permiso
+    if (this.tienePermiso) {
+      // Obtener datos en paralelo
+      forkJoin({
+        miembros: this.service.getAllUser(),
+        proyectos: this.service.getAllProjects(),
+        eventos: this.service.getAllEvents()
+      }).subscribe(({ miembros, proyectos, eventos }) => {
+        // Asignar cantidades obtenidas
+        this.cantMiembros = miembros.length;
+        this.cantProyectos = proyectos.length;
+        this.cantEventos = eventos.length;
+
+        // Renderizar gráfica con los nuevos datos
+        this.renderChart();
+      });
+    }
+  }
+
+
+  // Método para verificar permisos del usuario
+  verificarPermiso(): void {
+    // Implementa tu lógica aquí para verificar si el usuario tiene acceso
+    // Por ejemplo, podrías verificar un rol del usuario
+    const userRole = this.service.getUserrole(); // Suponiendo que tienes un método para obtener el rol del usuario
+    this.tienePermiso = (userRole === 'admin' || userRole === 'JefeDirectivo'); // Cambia los roles según tus necesidades
   }
 
   // Método para renderizar la gráfica

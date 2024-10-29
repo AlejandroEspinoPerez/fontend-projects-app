@@ -37,7 +37,8 @@ export class LoginComponent {
           if (this.userdata) {
             if (this.userdata.password === this.loginform.value.password) {
               if (this.userdata.isActive) {
-                sessionStorage.setItem('username', this.userdata.id);
+                sessionStorage.setItem('currentUserId', this.userdata.id.toString());
+                sessionStorage.setItem('username', this.userdata.nombre); // Aquí asumo que tienes un campo 'nombre'
                 sessionStorage.setItem('userrole', this.userdata.rol);
                 this.router.navigate(['dashboard']);
               } else {

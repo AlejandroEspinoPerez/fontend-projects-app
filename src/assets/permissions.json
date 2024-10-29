@@ -36,6 +36,9 @@
     },
     "users": {
       "view": false
+    },
+    "dashboard": {
+      "view": true
     }
   },
   "admin": {
@@ -71,6 +74,9 @@
       "view": true
     },
     "reports": {
+      "view": true
+    },
+    "dashboard": {
       "view": true
     },
     "users": {
@@ -117,11 +123,13 @@
     },
     "reports": {
       "view": false
+    },
+    "dashboard": {
+      "view": false
     }
   },
   "Miembro": {
     "projects": {
-
       "view": true,
       "add": false,
       "edit": false,
@@ -156,6 +164,9 @@
       "view": false
     },
     "reports": {
+      "view": false
+    },
+    "dashboard": {
       "view": false
     }
   }

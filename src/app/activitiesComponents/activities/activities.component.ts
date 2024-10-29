@@ -27,8 +27,10 @@ export class ActivitiesComponent implements OnInit {
   projectId: string; // Variable para almacenar el ID del proyecto
   projectName: string = ''; // Inicialización
   generateReport = false;
+  havetask =true
 
-
+  projectLeaderId: number = 0; // ID del líder del proyecto
+  projectMemberIds: number[] = []; 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -58,8 +60,33 @@ export class ActivitiesComponent implements OnInit {
   // Método para obtener el nombre del proyecto por ID (ajusta según tu servicio)
   getProjectName(id: string) {
     this.api.getProjectById(Number(id)).subscribe(project => {
-      this.projectName = project.nombre;
+      this.projectLeaderId = project.lider.id; // Obtener el ID del líder del proyecto
+      this.projectMemberIds = project.miembros.map((member: any) => member.id); // IDs de los miembros del proyecto
+      this.checkIfUserIsLeader(); // Verificar si el usuario actual es el líder después de obtener el ID
     });
+  }
+
+  // Método para verificar si el usuario actual es el líder del proyecto
+  checkIfUserIsLeader() {
+    const currentUserId = this.api.getCurrentUserId(); // Implementa este método para obtener el ID del usuario actual
+    const currentUserRole = this.api.getUserrole(); // Obtener el rol del usuario actual
+    console.log("User role actual :", currentUserRole);
+    console.log("User id actual :", currentUserId);
+    console.log("Project id lider actual :", this.projectLeaderId);
+    console.log("Project id miembro actual :", this.projectMemberIds);
+    
+    if (currentUserId !== null) { // Verificar que el ID del usuario no sea null
+      if (currentUserRole === 'Lider' && !(currentUserId === this.projectLeaderId)) {
+        this.haveadd = false; // Permitir agregar si es líder
+        this.haveedit = false;
+        this.havedelete = false;
+        this.havetask = false;
+      }
+      // Si el usuario es miembro y no está en la lista de miembros del proyecto
+      if (currentUserRole === 'Miembro' && !this.projectMemberIds.includes(currentUserId)) {
+        this.havetask = false;
+      }
+    }
   }
 
   // Método para obtener las actividades por ID de proyecto
@@ -83,28 +110,6 @@ export class ActivitiesComponent implements OnInit {
       }
     });
   }
-
-  // getAllActivities() {
-  //   this.api.getAllActivities().subscribe({
-  //     next: (res) => {
-  //       this.dataSource = new MatTableDataSource(res);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.dataSource.sort = this.sort;
-  //     },
-  //     error: () => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Error al obtener los datos',
-  //         toast: true,
-  //         position: 'top-end',
-  //         showConfirmButton: false,
-  //         timer: 3000,
-  //         timerProgressBar: true
-  //       });
-  //     }
-  //   });
-  // }
-
 
   openDialog(): void {
     if (this.haveadd) {
@@ -209,7 +214,6 @@ export class ActivitiesComponent implements OnInit {
           this.haveedit = permissions.activities.edit;
           this.havedelete = permissions.activities.delete;
           this.generateReport = permissions.activities.generateReport;
-
           // Actualiza la UI según los permisos obtenidos
           this.getActivitiesByProject(this.projectId);  // Obtener actividades del proyecto
         } else {

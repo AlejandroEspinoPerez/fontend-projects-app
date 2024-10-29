@@ -34,7 +34,7 @@ export class DialogTaskComponent implements OnInit {
     });
 
     // Obtener la lista de responsables
-    this.api.getAllUser().subscribe((data: any) => {
+    this.api.getMembers().subscribe((data: any) => {
       this.usuariosResponsables = data; // Asigna la lista de usuarios responsables
     });
 

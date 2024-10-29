@@ -41,6 +41,14 @@ export class ApiService {
     return this.http.get(`${this.apiurlUser}nombre/${nombre}`);
   }
 
+  getMembers(): Observable<any> {
+    return this.http.get(`${this.apiurlUser}members`); // Llama al nuevo endpoint
+  }
+
+  getLideres(): Observable<any> {
+    return this.http.get(`${this.apiurlUser}lider`); // Llama al nuevo endpoint
+  }
+
   // **Obtener usuario por ID**
   getById(userId: number): Observable<any> {
     return this.http.get(`${this.apiurlUser}id/${userId}`);
@@ -84,6 +92,12 @@ export class ApiService {
     // Obtener rol del usuario desde el almacenamiento
     getUserrole(): string {
       return sessionStorage.getItem('userrole')?.toString() ?? '';
+  }
+
+  // Método para obtener el ID del usuario actual
+  getCurrentUserId(): number | null {
+    const userId = sessionStorage.getItem('currentUserId');
+    return userId ? parseInt(userId, 10) : null;
   }
 
   //=========================================== Projects

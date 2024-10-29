@@ -37,8 +37,9 @@ export class DialogProjectsComponent implements OnInit {
       resultado: ['', Validators.required]
     });
 
-    // Llamada para obtener los usuarios (lideres y miembros)
-    this.getUsuarios();
+    // Llamadas para obtener los usuarios (líderes y miembros)
+    this.getLideres();
+    this.getMiembros();
 
     if (this.editData) {
       this.actionButton = "UPDATE";
@@ -58,17 +59,17 @@ export class DialogProjectsComponent implements OnInit {
     }
   }
 
-  // Método para obtener la lista de usuarios
-  getUsuarios() {
-    this.api.getAllUser().subscribe({
+  // Método para obtener la lista de líderes
+  getLideres() {
+    this.api.getLideres().subscribe({
       next: (res) => {
-        this.usuarios = res; // Guardar usuarios
+        this.usuarios = res; // Guardar líderes
       },
       error: () => {
         Swal.fire({
           position: 'top-end',
           icon: 'error',
-          title: 'Error al obtener los usuarios',
+          title: 'Error al obtener los líderes',
           showConfirmButton: false,
           timer: 1000
         });
@@ -76,6 +77,23 @@ export class DialogProjectsComponent implements OnInit {
     });
   }
 
+  // Método para obtener la lista de miembros
+  getMiembros() {
+    this.api.getMembers().subscribe({
+      next: (res) => {
+        this.miembrosSeleccionados = res; // Guardar miembros
+      },
+      error: () => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Error al obtener los miembros',
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+  }
   addProject() {
     if (!this.editData) {
       if (this.projectForm.valid) {

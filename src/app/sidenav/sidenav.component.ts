@@ -58,6 +58,7 @@ export class SidenavComponent implements OnInit {
   reports = false;
   calendar = false;
   projects = true;
+  dashboard = false;
 
 
   constructor(
@@ -108,12 +109,14 @@ export class SidenavComponent implements OnInit {
           this.events = permissions.events?.view || false;
           this.projects = permissions.projects?.view || false;
           this.reports = permissions.reports?.view || false;
+          this.dashboard = permissions.dashboard?.view || false;
 
           console.log('Permisos establecidos:');
           console.log('Calendar:', this.calendar);
           console.log('Events:', this.events);
           console.log('Projects:', this.projects);
           console.log('Reports:', this.reports);
+          console.log('Dashboard:', this.dashboard);
         } else {
           console.warn('No se encontraron permisos para el rol:', userRole);
         }
