@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
     // Implementa tu lógica aquí para verificar si el usuario tiene acceso
     // Por ejemplo, podrías verificar un rol del usuario
     const userRole = this.service.getUserrole(); // Suponiendo que tienes un método para obtener el rol del usuario
-    this.tienePermiso = (userRole === 'admin' || userRole === 'JefeDirectivo'); // Cambia los roles según tus necesidades
+    this.tienePermiso = (userRole === 'admin' || userRole === 'Jefe'); // Cambia los roles según tus necesidades
   }
 
   // Método para renderizar la gráfica
