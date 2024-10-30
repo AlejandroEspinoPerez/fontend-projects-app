@@ -35,7 +35,7 @@
       </mat-form-field>
 
       <!-- Fecha de fin -->
-      <mat-form-field class="input" appearance="outline">
+      <mat-form-field *ngIf="actionButton === 'UPDATE'" class="input" appearance="outline">
         <mat-label>Fecha de Fin</mat-label>
         <input matInput [matDatepicker]="finPicker" formControlName="fechaFin" placeholder="Elige la fecha de fin..">
         <mat-datepicker-toggle matSuffix [for]="finPicker"></mat-datepicker-toggle>
@@ -44,6 +44,7 @@
           La fecha de fin es requerida.
         </mat-error>
       </mat-form-field>
+
 
       <!-- Responsable -->
     <mat-form-field class="input" appearance="outline">

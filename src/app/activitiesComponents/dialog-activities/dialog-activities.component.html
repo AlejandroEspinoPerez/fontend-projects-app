@@ -29,13 +29,14 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="input" appearance="outline">
+      <!-- Campo Fecha de Fin, solo visible en modo edición -->
+      <mat-form-field *ngIf="actionButton === 'UPDATE'" class="input" appearance="outline">
         <mat-label>Fecha de Fin</mat-label>
         <input matInput [matDatepicker]="finPicker" formControlName="fechaFin" placeholder="Elige la fecha de fin..">
         <mat-datepicker-toggle matSuffix [for]="finPicker"></mat-datepicker-toggle>
         <mat-datepicker #finPicker></mat-datepicker>
         <mat-error *ngIf="actividadForm.get('fechaFin')?.invalid && actividadForm.get('fechaFin')?.touched">
-          La fecha de fin es requerida.
+          La fecha de fin es opcional.
         </mat-error>
       </mat-form-field>
 

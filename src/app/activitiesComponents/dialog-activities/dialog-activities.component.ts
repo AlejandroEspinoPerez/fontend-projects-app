@@ -23,12 +23,12 @@ export class DialogActivitiesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Inicializa el formulario con los campos necesarios para la actividad
+    // Configura el formulario con los campos necesarios para la actividad
     this.actividadForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
+      fechaFin: [''],  // Inicialmente, no requerido
       responsable: ['', Validators.required],
     });
 
@@ -37,7 +37,8 @@ export class DialogActivitiesComponent implements OnInit {
       this.usuariosResponsables = data; // Asigna la lista de usuarios responsables
     });
 
-    if (this.editData && this.editData.id) { // Si editData contiene id, estamos en modo edición
+    // Modo edición
+    if (this.editData && this.editData.id) {
       this.actionButton = "UPDATE";
       this.actividadForm.patchValue({
         nombre: this.editData.nombre,
@@ -55,14 +56,14 @@ export class DialogActivitiesComponent implements OnInit {
         nombre: this.actividadForm.value.nombre,
         descripcion: this.actividadForm.value.descripcion,
         fechaInicio: new Date(this.actividadForm.value.fechaInicio).toISOString().split('T')[0],
-        fechaFin: new Date(this.actividadForm.value.fechaFin).toISOString().split('T')[0],
+        fechaFin: this.actividadForm.value.fechaFin ? new Date(this.actividadForm.value.fechaFin).toISOString().split('T')[0] : null,
         responsable: this.actividadForm.value.responsable,
-        proyecto: this.editData.projectId // Se asegura de utilizar el ID del proyecto
+        proyecto: this.editData.projectId // Asegura de utilizar el ID del proyecto
       };
 
       // Verificar si se trata de edición o creación
       if (this.editData && this.editData.id) {
-        this.updateActividad(this.editData.id, actividadData); // Llamar a la función de actualización
+        this.updateActividad(this.editData.id, actividadData); // Llama a la función de actualización
       } else {
         this.api.postActivities(actividadData).subscribe({
           next: (res) => {

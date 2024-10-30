@@ -29,7 +29,7 @@ export class DialogTaskComponent implements OnInit {
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
+      fechaFin: this.actionButton === 'UPDATE' ? [''] : null, // No lo hacemos requerido en modo creación
       responsable: ['', Validators.required]
     });
 
@@ -56,21 +56,22 @@ export class DialogTaskComponent implements OnInit {
 
   addTask() {
     if (this.taskForm.valid) {
-      const taskData = {
+      const taskData: any = {
         nombre: this.taskForm.value.nombre,
         descripcion: this.taskForm.value.descripcion,
         fechaInicio: new Date(this.taskForm.value.fechaInicio).toISOString().split('T')[0],
-        fechaFin: new Date(this.taskForm.value.fechaFin).toISOString().split('T')[0],
-        responsable: this.taskForm.value.responsable, // Aquí se debe guardar el ID del responsable
-        actividad: this.editData.idActividad // Se asocia la tarea con la actividad
+        responsable: this.taskForm.value.responsable,
+        actividad: this.editData.idActividad
       };
 
-      // Verificar si es edición o creación
+      // Solo añadir fechaFin si existe en el formulario
+      if (this.taskForm.value.fechaFin) {
+        taskData.fechaFin = new Date(this.taskForm.value.fechaFin).toISOString().split('T')[0];
+      }
+
       if (this.editData && this.editData.id) {
-        console.log(this.editData.id);
-        this.updateTask(this.editData.id, taskData); // Se debe pasar solo el ID de la tarea, no un objeto
+        this.updateTask(this.editData.id, taskData);
       } else {
-        // Crear nueva tarea
         this.api.postTask(taskData).subscribe({
           next: (res) => {
             this.taskForm.reset();
@@ -96,6 +97,7 @@ export class DialogTaskComponent implements OnInit {
       }
     }
   }
+
 
 
   updateTask(taskId: number, taskData: any) {
